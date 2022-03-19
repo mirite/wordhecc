@@ -1,0 +1,18 @@
+.unused {
+composes: letter from './Letter.module.css';
+}
+
+.notInWord {
+    composes: letter from './Letter.module.css';
+    background-color: gray;
+}
+
+.inPosition {
+    composes: letter from './Letter.module.css';
+    background-color: green;
+}
+
+.inWord {
+    composes: letter from './Letter.module.css';
+    background-color: yellow;
+}
