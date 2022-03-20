@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Keyboard from './Keyboard';
 import Word from './Word';
 import {ELetterState, IAttempt, IKeyboard, ILetter} from './types';
@@ -22,7 +22,8 @@ function createStartingKeyboard(letters: string[][]): IKeyboard {
 }
 
 const App = () => {
-  const word = 'Hello';
+
+  const [word, setWord] = useState('');
 
   const [keyboard, setKeyboardState] = useState<IKeyboard>(createStartingKeyboard(letters));
 const [attempt, setAttempt] = useState<IAttempt>([]);
@@ -47,6 +48,12 @@ const [attempt, setAttempt] = useState<IAttempt>([]);
     items.pop();
     setAttempt(items);
   }
+
+  useEffect(()=> {
+    fetch('/.netlify/functions/word')
+      .then(result => result.json())
+      .then(wordObj => setWord(wordObj.word))
+  },[]);
 
   return (
     <div className="container-xxl">
