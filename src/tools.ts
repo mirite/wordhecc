@@ -1,4 +1,4 @@
-import {IAttemptResult} from './types';
+
 
 export function checkWord(attemptedWord: string, actualWord: string) {
   const cleanedAttemptedWord = attemptedWord.toUpperCase();
@@ -32,4 +32,18 @@ export function findIncludedCharacters (attemptedWord: string, actualWord: strin
       }
     }
     return output;
+}
+
+const wordsRaw = require('./words.json');
+const words: string[] = [];
+for(const [word,] of Object.entries(wordsRaw)) {
+  words.push(word);
+}
+
+function getRandomInt(max:number) {
+  return Math.floor(Math.random() * max);
+}
+
+export function getWord(): string {
+  return words[getRandomInt(words.length-1)]
 }

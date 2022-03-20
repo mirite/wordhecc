@@ -2,7 +2,7 @@ import expect from 'Expect';
 import {
   checkWord,
   findIncludedCharacters,
-  findMatchingCharacters,
+  findMatchingCharacters, getWord,
 } from '../src/tools';
 
 
@@ -62,3 +62,9 @@ describe('tool', function() {
     })
   })
 });
+
+describe('Get word', function() {
+  it('Should return a word', function() {
+    expect(getWord()).toBeTruthy()
+  })
+})
