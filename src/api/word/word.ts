@@ -1,6 +1,5 @@
 import { Handler } from '@netlify/functions'
-import fs from 'fs';
-const wordsRaw = fs.readFileSync('./words.json').toString();
+const wordsRaw = require('./words.json');
 const wordsJSON = JSON.parse(wordsRaw);
 const words: string[] = [];
 for(const [word,] of Object.entries(wordsJSON)) {
