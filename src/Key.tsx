@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from './styles/key.module.css';
+import * as styles from './styles/Key.module.css';
 import {ELetterState, ILetter} from './types';
 
 interface IProps {
@@ -17,7 +17,7 @@ const stateClasses: {[key in ELetterState]: string} = {
 const Key = (props: IProps) => {
   const stateClass = stateClasses[props.letter.state];
   return (
-    <button type="button" className={"btn btn-primary " + styles.key + ' ' + stateClass} onClick={props.onClick}>
+    <button type="button" className={"btn btn-primary " + stateClass} onClick={props.onClick}>
       {props.letter.character}
     </button>
   );
