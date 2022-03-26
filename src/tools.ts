@@ -40,9 +40,8 @@ export function findIncludedCharacters(
 
 const wordsRaw = require('./dict.json');
 
-function getDaysSince():number {
-
-	const date1 = new Date("03/26/2022");
+function getDaysSince(): number {
+	const date1 = new Date('03/26/2022');
 	const today = new Date();
 
 	const differenceInTime = today.getTime() - date1.getTime();
