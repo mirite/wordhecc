@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Keyboard from './Keyboard';
 import CurrentAttempt from './CurrentAttempt';
 import {
@@ -14,6 +14,7 @@ import {
 	createStartingKeyboard,
 	isKeyOnKeyboard,
 } from '../helpers/create-keyboard.';
+import * as styles from '../styles/App.module.css';
 
 interface IState {
 	keyboard: IKeyboard;
@@ -68,8 +69,8 @@ class App extends React.Component<IProps, IState> {
 	addLetterToAttempt(letter: ILetter) {
 		const { attempt } = this.state;
 		const items = [...attempt];
-		if (items.length >= 9) return;
-		items.push(letter);
+		if (items.length >= 8) return;
+		items.push({character: letter.character, state: ELetterState.unused});
 		this.setAttempt(items);
 	}
 
@@ -132,11 +133,11 @@ class App extends React.Component<IProps, IState> {
 	render() {
 		const { solved, attempt, previousAttempts, keyboard } = this.state;
 		if (solved) {
-			return <h1>You did it!</h1>;
+			return <h1 className={styles.congratulations}>You did it!</h1>;
 		}
 
 		return (
-			<div className="container-sm">
+			<div className={styles.container}>
 				<PreviousAttempts previousAttempts={previousAttempts} />
 				<CurrentAttempt attempt={attempt} />
 				<Keyboard

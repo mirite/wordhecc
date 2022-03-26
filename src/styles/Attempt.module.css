@@ -1,5 +1,7 @@
 .attempt {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     gap: 0.25rem;
+    border: 1px solid black;
+    padding: 0.5rem;
 }

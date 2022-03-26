@@ -56,7 +56,7 @@ function getDaysSince(): number {
 }
 
 export function getWord(): string {
-	return wordListRaw[getDaysSince() + 23];
+	return wordListRaw[getDaysSince()];
 }
 
 export function removeCorrectValues(
