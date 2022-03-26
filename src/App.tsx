@@ -55,10 +55,13 @@ const App = () => {
 	}
 
 	function submitAttempt() {
-		const attemptAsString = attempt.reduce((newString, currentLetter)=>newString + currentLetter.character, '');
+		const attemptAsString = attempt.reduce(
+			(newString, currentLetter) => newString + currentLetter.character,
+			''
+		);
 		fetch('/.netlify/functions/check', {
 			method: 'POST',
-			body: JSON.stringify({attempt: attemptAsString}),
+			body: JSON.stringify({ attempt: attemptAsString }),
 		})
 			.then((result) => result.json())
 			.then((wordObj) => setWord(wordObj.word));
