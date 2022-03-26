@@ -43,6 +43,7 @@ const App = () => {
 
 	function addLetterToAttempt(letter: ILetter) {
 		const items = [...attempt];
+		if (items.length >= 9) return;
 		items.push(letter);
 		setAttempt(items);
 	}
