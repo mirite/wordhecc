@@ -40,7 +40,8 @@ export function findIncludedCharacters(
 	return output;
 }
 
-const wordsRaw = require('./dict.json');
+const wordListRaw = require('./dict.json');
+const wordListAlpha = require('./dictAlpha.json');
 
 function getDaysSince(): number {
 	const date1 = new Date('03/26/2022');
@@ -53,7 +54,7 @@ function getDaysSince(): number {
 }
 
 export function getWord(): string {
-	return wordsRaw[getDaysSince()];
+	return wordListRaw[getDaysSince()];
 }
 
 export function checkWordOfTheDay(
@@ -83,7 +84,7 @@ export function checkWordOfTheDay(
 }
 
 export function getDictionary() {
-	return wordsRaw;
+	return wordListAlpha;
 }
 
 export function isInDictionary(word: string) {

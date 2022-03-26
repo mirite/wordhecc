@@ -16,7 +16,7 @@ const shuffleArray = array => {
   }
 }
 
-shuffleArray(words);
-fs.writeFileSync('dict.json', JSON.stringify(words));
+//shuffleArray(words);
+fs.writeFileSync('dictAlpha.json', JSON.stringify(words));
 console.log(words);
 
