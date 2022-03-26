@@ -4,7 +4,7 @@ import {
 	checkWordOfTheDay,
 	findIncludedCharacters,
 	findMatchingCharacters,
-	getWord,
+	getWord, removeCorrectValues,
 } from '../src/tools';
 import { ELetterState } from '../src/types';
 
@@ -62,12 +62,23 @@ describe('tool', function () {
 			const result = findIncludedCharacters('HOLP', 'MAYBE');
 			expect(result.some((l) => l)).toBe(false);
 		});
+		it('Should return only the first character as in word when there is multiple in the guess, but only one in the word.', function () {
+			const result = findIncludedCharacters('JEEP', 'JEP');
+			expect(result[1]).toBe(true);
+			expect(result[2]).toBe(false);
+		});
 	});
 });
 
 describe('Get word', function () {
 	it('Should return a word', function () {
 		expect(getWord()).toBeTruthy();
+	});
+});
+
+describe('Remove correct values', function() {
+	it('Should remove the letters in the positions that are true', function() {
+		expect(removeCorrectValues('HELP', [false, true, true, false])).toEqual('H__P');
 	});
 });
 
@@ -89,5 +100,10 @@ describe('Check word', function () {
 		expect(
 			result.every((l) => l.state === ELetterState.inWord)
 		).toBeTruthy();
+	});
+	it('Should not show a letter as in word, if it already had an instance in position', function () {
+		const result = checkWordOfTheDay('RABBIT', 'GERBIL');
+		expect(result[2].state).toEqual(ELetterState.notInWord);
+		expect(result[3].state).toEqual(ELetterState.inPosition);
 	});
 });

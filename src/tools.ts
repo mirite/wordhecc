@@ -31,7 +31,9 @@ export function findIncludedCharacters(
 	const actualArray = actualWord.toUpperCase().split('');
 
 	for (let x = 0; x < attemptArray.length; x++) {
-		if (actualArray.includes(attemptArray[x])) {
+		const matchIndex = actualArray.findIndex((l) => l === attemptArray[x]);
+		if (matchIndex >= 0 && attemptArray[x] !== '_') {
+			actualArray[matchIndex] = '';
 			output.push(true);
 		} else {
 			output.push(false);
@@ -57,6 +59,18 @@ export function getWord(): string {
 	return wordListRaw[getDaysSince()];
 }
 
+export function removeCorrectValues(
+	attempt: string,
+	lettersInCorrectPosition: Array<boolean>
+) {
+	const wordAsArray = attempt.split('');
+	let output = '';
+	for (let x = 0; x < wordAsArray.length; x++) {
+		output += lettersInCorrectPosition[x] ? '_' : wordAsArray[x];
+	}
+	return output;
+}
+
 export function checkWordOfTheDay(
 	attempt: string,
 	override?: string
@@ -67,7 +81,14 @@ export function checkWordOfTheDay(
 		attempt,
 		actualWord
 	);
-	const lettersInWrongPosition = findIncludedCharacters(attempt, actualWord);
+	const attemptWithCorrectValuesRemoved = removeCorrectValues(
+		attempt,
+		lettersInCorrectPosition
+	);
+	const lettersInWrongPosition = findIncludedCharacters(
+		attemptWithCorrectValuesRemoved,
+		actualWord
+	);
 
 	for (let x = 0; x < attempt.length; x++) {
 		let letterState: ELetterState;
