@@ -38,16 +38,25 @@ const App = () => {
 	);
 	const [attempt, setAttempt] = useState<IAttempt>([]);
 	const [previousAttempts, setPreviousAttempts] = useState<IAttempt[]>([]);
+
 	function handleClick(letter: ILetter) {
-		// const items = [...keyboard];
-		// const letterToUpdate = items.findIndex(
-		// 	(key) => key.character === letter.character
-		// );
-		// const newLetterState = { ...items[letterToUpdate] };
-		// newLetterState.state = ELetterState.notInWord;
-		// items[letterToUpdate] = newLetterState;
-		// setKeyboardState(items);
 		addLetterToAttempt(letter);
+	}
+
+	function updateKeys(response: ICheckWordResponse) {
+		const keys = [...keyboard];
+		const { result } = response;
+		for (const key of keys) {
+			const match = result.find(
+				(char) => char.character === key.character
+			);
+			if (!match) continue;
+			if (match.state > key.state) {
+				key.state = match.state;
+			}
+		}
+
+		setKeyboardState(keys);
 	}
 
 	function addLetterToAttempt(letter: ILetter) {
@@ -72,14 +81,18 @@ const App = () => {
 			.then((result) => result.json())
 			// eslint-disable-next-line no-console
 			.then((response) => {
-				const responseObj = response as ICheckWordResponse;
-				if (responseObj.complete) setSolved(true);
-				const oldPreviousAttempts = [...previousAttempts];
-				oldPreviousAttempts.push(responseObj.result);
-				setPreviousAttempts(oldPreviousAttempts);
-				setAttempt([]);
+				updateAttempts(response as ICheckWordResponse);
+				updateKeys(response as ICheckWordResponse);
 			});
 	}
+
+	const updateAttempts = (response: ICheckWordResponse) => {
+		if (response.complete) setSolved(true);
+		const oldPreviousAttempts = [...previousAttempts];
+		oldPreviousAttempts.push(response.result);
+		setPreviousAttempts(oldPreviousAttempts);
+		setAttempt([]);
+	};
 
 	if (solved) {
 		return <h1>You did it!</h1>;
