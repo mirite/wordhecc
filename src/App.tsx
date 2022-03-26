@@ -64,14 +64,9 @@ const App = () => {
 			body: JSON.stringify({ attempt: attemptAsString }),
 		})
 			.then((result) => result.json())
-			.then((wordObj) => setWord(wordObj.word));
+			// eslint-disable-next-line no-console
+			.then((response) => console.log(response));
 	}
-
-	useEffect(() => {
-		fetch('/.netlify/functions/word')
-			.then((result) => result.json())
-			.then((wordObj) => setWord(wordObj.word));
-	}, []);
 
 	return (
 		<div className="container-xxl">

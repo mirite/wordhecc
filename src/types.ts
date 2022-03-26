@@ -11,5 +11,10 @@ export interface ILetter {
 	row?: number;
 }
 
+export interface ICheckWordResponse {
+	complete: boolean;
+	result: IAttempt;
+}
+
 export interface IKeyboard extends Array<ILetter> {}
 export interface IAttempt extends Array<ILetter> {}
