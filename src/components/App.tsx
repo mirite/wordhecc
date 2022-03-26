@@ -15,104 +15,143 @@ import {
 	isKeyOnKeyboard,
 } from '../helpers/create-keyboard.';
 
-const App = () => {
-	const [solved, setSolved] = useState(false);
+interface IState {
+	keyboard: IKeyboard;
+	attempt: IAttempt;
+	previousAttempts: IAttempt[];
+	solved: boolean;
+}
 
-	const [keyboard, setKeyboardState] = useState<IKeyboard>(
-		createStartingKeyboard()
-	);
-	const [attempt, setAttempt] = useState<IAttempt>([]);
-	const [previousAttempts, setPreviousAttempts] = useState<IAttempt[]>([]);
+interface IProps {}
 
-	const updateKeys = (response: ICheckWordResponse) => {
+class App extends React.Component<IProps, IState> {
+	constructor(props: IProps) {
+		super(props);
+		this.state = {
+			solved: false,
+			keyboard: createStartingKeyboard(),
+			attempt: [],
+			previousAttempts: [],
+		};
+	}
+
+	setSolved() {
+		this.setState({ solved: true });
+	}
+
+	setAttempt(attempt: IAttempt) {
+		this.setState({ attempt });
+	}
+
+	updateKeys(response: ICheckWordResponse) {
+		const { keyboard } = this.state;
 		const keys = [...keyboard];
 		const { result } = response;
-		for (const key of keys) {
+
+		const updateKeyState = (key: ILetter) => {
 			const match = result.find(
 				(char) => char.character === key.character
 			);
-			if (!match) continue;
+			if (!match) return;
 			if (match.state > key.state) {
 				key.state = match.state;
 			}
+		};
+
+		for (const key of keys) {
+			updateKeyState(key);
 		}
 
-		setKeyboardState(keys);
-	};
+		this.setState({ keyboard: keys });
+	}
 
-	const addLetterToAttempt = (letter: ILetter) => {
+	addLetterToAttempt(letter: ILetter) {
+		const { attempt } = this.state;
 		const items = [...attempt];
 		if (items.length >= 9) return;
 		items.push(letter);
-		setAttempt(items);
-	};
+		this.setAttempt(items);
+	}
 
-	const removeLetterFromAttempt = () => {
+	removeLetterFromAttempt() {
+		const { attempt } = this.state;
 		const items = [...attempt];
 		items.pop();
-		setAttempt(items);
-	};
+		this.setAttempt(items);
+	}
 
-	const submitAttempt = () => {
+	async submitAttempt() {
+		const { attempt } = this.state;
 		const attemptAsString = stringFromAttempt(attempt);
-		fetch('/.netlify/functions/check', {
+		const result = await fetch('/.netlify/functions/check', {
 			method: 'POST',
 			body: JSON.stringify({ attempt: attemptAsString }),
-		})
-			.then((result) => result.json())
-			// eslint-disable-next-line no-console
-			.then((response) => {
-				updateAttempts(response as ICheckWordResponse);
-				updateKeys(response as ICheckWordResponse);
-			});
-	};
+		});
+		const response = await result.json();
+		this.updateAttempts(response as ICheckWordResponse);
+		this.updateKeys(response as ICheckWordResponse);
+	}
 
-	const updateAttempts = (response: ICheckWordResponse) => {
-		if (response.complete) setSolved(true);
+	updateAttempts(response: ICheckWordResponse) {
+		if (response.complete) this.setSolved();
+		const { previousAttempts } = this.state;
 		const oldPreviousAttempts = [...previousAttempts];
 		oldPreviousAttempts.push(response.result);
-		setPreviousAttempts(oldPreviousAttempts);
-		setAttempt([]);
-	};
+		this.setState({ attempt: [], previousAttempts: oldPreviousAttempts });
+	}
 
-	const handleKeypress = (e: KeyboardEvent) => {
+	handleKeypress(e: KeyboardEvent) {
 		if (e.key === 'Backspace') {
-			removeLetterFromAttempt();
+			this.removeLetterFromAttempt();
 			return;
 		}
 
-		if (e.key === 'Enter' && isInDictionary(stringFromAttempt(attempt))) {
-			submitAttempt();
+		if (
+			e.key === 'Enter' &&
+			isInDictionary(stringFromAttempt(this.state.attempt))
+		) {
+			this.submitAttempt();
 			return;
 		}
 		if (!isKeyOnKeyboard(e.key)) return;
-		addLetterToAttempt({
+		this.addLetterToAttempt({
 			character: e.key.toUpperCase(),
 			state: ELetterState.unused,
+			row: 0,
 		});
-	};
-
-	window.removeEventListener('keyup', handleKeypress);
-	useEffect(() => window.addEventListener('keyup', handleKeypress), []);
-
-	if (solved) {
-		return <h1>You did it!</h1>;
 	}
 
-	return (
-		<div className="container-sm">
-			<PreviousAttempts previousAttempts={previousAttempts} />
-			<CurrentAttempt attempt={attempt} />
-			<Keyboard
-				keyboardState={keyboard}
-				onKeyClick={(letter: ILetter) => addLetterToAttempt(letter)}
-				onBackClick={removeLetterFromAttempt}
-				onEnterClick={submitAttempt}
-				isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
-				isBackspaceEnabled={attempt.length > 0}
-			/>
-		</div>
-	);
-};
+	componentDidMount() {
+		window.addEventListener('keyup', (e) => this.handleKeypress(e));
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('keyup', this.handleKeypress);
+	}
+
+	render() {
+		const { solved, attempt, previousAttempts, keyboard } = this.state;
+		if (solved) {
+			return <h1>You did it!</h1>;
+		}
+
+		return (
+			<div className="container-sm">
+				<PreviousAttempts previousAttempts={previousAttempts} />
+				<CurrentAttempt attempt={attempt} />
+				<Keyboard
+					keyboardState={keyboard}
+					onKeyClick={(letter: ILetter) =>
+						this.addLetterToAttempt(letter)
+					}
+					onBackClick={() => this.removeLetterFromAttempt()}
+					onEnterClick={() => this.submitAttempt()}
+					isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
+					isBackspaceEnabled={attempt.length > 0}
+				/>
+			</div>
+		);
+	}
+}
 
 export default App;
