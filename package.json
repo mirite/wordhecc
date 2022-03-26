@@ -6,7 +6,7 @@
     "start": "parcel src/index.html",
     "build": "yarn run lint && parcel build src/index.html",
     "test": "ts-mocha --recursive \"./test/*.ts\"",
-    "lint": "eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
+    "lint": "eslint ./test/**/*.ts --fix && eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
   },
   "browserslist": {
     "production": [
