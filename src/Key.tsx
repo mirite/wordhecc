@@ -7,7 +7,7 @@ interface IProps {
 	onClick: () => void;
 }
 
-const stateClasses: { [key in ELetterState]: string } = {
+export const stateClasses: { [key in ELetterState]: string } = {
 	[ELetterState.unused]: styles.unused,
 	[ELetterState.notInWord]: styles.notInWord,
 	[ELetterState.inPosition]: styles.inPosition,

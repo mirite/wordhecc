@@ -9,8 +9,8 @@ interface IProps {
 const Attempt = (props: IProps) => {
 	return (
 		<div className={styles.attempt}>
-			{props.attempt.map((letter) => (
-				<AttemptLetter key={letter.character} letter={letter} />
+			{props.attempt.map((letter, i) => (
+				<AttemptLetter key={i} letter={letter} />
 			))}
 		</div>
 	);
