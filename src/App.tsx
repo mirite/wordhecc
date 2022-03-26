@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Keyboard from './Keyboard';
 import CurrentAttempt from './CurrentAttempt';
 import {
@@ -8,8 +8,8 @@ import {
 	IKeyboard,
 	ILetter,
 } from './types';
-import Attempt from './Attempt';
 import PreviousAttempts from './PreviousAttempts';
+import { isInDictionary, stringFromAttempt } from './tools';
 
 const letters = [
 	['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -64,10 +64,7 @@ const App = () => {
 	}
 
 	function submitAttempt() {
-		const attemptAsString = attempt.reduce(
-			(newString, currentLetter) => newString + currentLetter.character,
-			''
-		);
+		const attemptAsString = stringFromAttempt(attempt);
 		fetch('/.netlify/functions/check', {
 			method: 'POST',
 			body: JSON.stringify({ attempt: attemptAsString }),
@@ -97,6 +94,8 @@ const App = () => {
 				onKeyClick={(letter: ILetter) => handleClick(letter)}
 				onBackClick={removeLetterFromAttempt}
 				onEnterClick={submitAttempt}
+				isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
+				isBackspaceEnabled={attempt.length > 0}
 			/>
 		</div>
 	);

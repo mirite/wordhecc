@@ -10,6 +10,8 @@ interface IProps {
 	onKeyClick: (letter: ILetter) => void;
 	onBackClick: () => void;
 	onEnterClick: () => void;
+	isEnterEnabled: boolean;
+	isBackspaceEnabled: boolean;
 }
 
 const Keyboard = (props: IProps) => {
@@ -35,7 +37,10 @@ const Keyboard = (props: IProps) => {
 			{letters.map((row, rIndex) => (
 				<div key={rIndex} className={styles.row}>
 					{rIndex === letters.length - 1 ? (
-						<EnterButton onClick={props.onEnterClick} />
+						<EnterButton
+							onClick={props.onEnterClick}
+							enabled={props.isEnterEnabled}
+						/>
 					) : (
 						''
 					)}
@@ -47,7 +52,10 @@ const Keyboard = (props: IProps) => {
 						/>
 					))}
 					{rIndex === letters.length - 1 ? (
-						<BackspaceButton onClick={props.onBackClick} />
+						<BackspaceButton
+							onClick={props.onBackClick}
+							enabled={props.isBackspaceEnabled}
+						/>
 					) : (
 						''
 					)}

@@ -2,6 +2,7 @@ import React from 'react';
 
 interface IProps {
 	onClick: () => void;
+	enabled: boolean;
 }
 
 const EnterButton = (props: IProps) => {
@@ -10,6 +11,7 @@ const EnterButton = (props: IProps) => {
 			type="button"
 			onClick={props.onClick}
 			className={'btn btn-primary'}
+			disabled={!props.enabled}
 		>
 			Enter
 		</button>

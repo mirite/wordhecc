@@ -2,6 +2,7 @@ import React from 'react';
 
 interface IProps {
 	onClick: () => void;
+	enabled: boolean;
 }
 
 const BackspaceButton = (props: IProps) => {
@@ -10,6 +11,7 @@ const BackspaceButton = (props: IProps) => {
 			type="button"
 			onClick={props.onClick}
 			className={'btn btn-primary'}
+			disabled={!props.enabled}
 		>
 			Back
 		</button>

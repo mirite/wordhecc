@@ -81,3 +81,18 @@ export function checkWordOfTheDay(
 	}
 	return result;
 }
+
+export function getDictionary() {
+	return wordsRaw;
+}
+
+export function isInDictionary(word: string) {
+	return getDictionary().includes(word);
+}
+
+export function stringFromAttempt(attempt: IAttempt): string {
+	return attempt.reduce(
+		(newString, currentLetter) => newString + currentLetter.character,
+		''
+	);
+}
