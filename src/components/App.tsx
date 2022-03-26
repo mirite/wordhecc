@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Keyboard from './Keyboard';
 import CurrentAttempt from './CurrentAttempt';
 import {
@@ -9,8 +9,11 @@ import {
 	ILetter,
 } from '../types';
 import PreviousAttempts from './PreviousAttempts';
-import {isInDictionary, stringFromAttempt} from '../helpers/tools';
-import {createStartingKeyboard} from '../helpers/create-keyboard.';
+import { isInDictionary, stringFromAttempt } from '../helpers/tools';
+import {
+	createStartingKeyboard,
+	isKeyOnKeyboard,
+} from '../helpers/create-keyboard.';
 
 const App = () => {
 	const [solved, setSolved] = useState(false);
@@ -72,23 +75,25 @@ const App = () => {
 		setAttempt([]);
 	};
 
-	const handleKeypress = (e)=>{
-		console.log(attempt);
-		if(e.key === 'Backspace') {
+	const handleKeypress = (e: KeyboardEvent) => {
+		if (e.key === 'Backspace') {
 			removeLetterFromAttempt();
 			return;
 		}
 
-		if(e.key === 'Enter' && isInDictionary(stringFromAttempt(attempt))) {
+		if (e.key === 'Enter' && isInDictionary(stringFromAttempt(attempt))) {
 			submitAttempt();
 			return;
 		}
-		if(e.keyCode>90 || e.keyCode<65) return;
-		addLetterToAttempt({character: e.key.toUpperCase(), state:ELetterState.unused});
+		if (!isKeyOnKeyboard(e.key)) return;
+		addLetterToAttempt({
+			character: e.key.toUpperCase(),
+			state: ELetterState.unused,
+		});
 	};
 
 	window.removeEventListener('keyup', handleKeypress);
-	useEffect(()=>window.addEventListener('keyup', handleKeypress),[]);
+	useEffect(() => window.addEventListener('keyup', handleKeypress), []);
 
 	if (solved) {
 		return <h1>You did it!</h1>;
