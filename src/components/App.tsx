@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Keyboard from './Keyboard';
 import CurrentAttempt from './CurrentAttempt';
 import {
@@ -7,43 +7,21 @@ import {
 	ICheckWordResponse,
 	IKeyboard,
 	ILetter,
-} from './types';
+} from '../types';
 import PreviousAttempts from './PreviousAttempts';
-import { isInDictionary, stringFromAttempt } from './tools';
-
-const letters = [
-	['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-	['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-	['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-];
-
-function createStartingKeyboard(keyboardCharacters: string[][]): IKeyboard {
-	const rows = keyboardCharacters.map((row, rIndex) => {
-		return row.map((letter): ILetter => {
-			return {
-				character: letter,
-				row: rIndex,
-				state: ELetterState.unused,
-			};
-		});
-	});
-	return rows.flat(1);
-}
+import {isInDictionary, stringFromAttempt} from '../helpers/tools';
+import {createStartingKeyboard} from '../helpers/create-keyboard.';
 
 const App = () => {
 	const [solved, setSolved] = useState(false);
 
 	const [keyboard, setKeyboardState] = useState<IKeyboard>(
-		createStartingKeyboard(letters)
+		createStartingKeyboard()
 	);
 	const [attempt, setAttempt] = useState<IAttempt>([]);
 	const [previousAttempts, setPreviousAttempts] = useState<IAttempt[]>([]);
 
-	function handleClick(letter: ILetter) {
-		addLetterToAttempt(letter);
-	}
-
-	function updateKeys(response: ICheckWordResponse) {
+	const updateKeys = (response: ICheckWordResponse) => {
 		const keys = [...keyboard];
 		const { result } = response;
 		for (const key of keys) {
@@ -57,22 +35,22 @@ const App = () => {
 		}
 
 		setKeyboardState(keys);
-	}
+	};
 
-	function addLetterToAttempt(letter: ILetter) {
+	const addLetterToAttempt = (letter: ILetter) => {
 		const items = [...attempt];
 		if (items.length >= 9) return;
 		items.push(letter);
 		setAttempt(items);
-	}
+	};
 
-	function removeLetterFromAttempt() {
+	const removeLetterFromAttempt = () => {
 		const items = [...attempt];
 		items.pop();
 		setAttempt(items);
-	}
+	};
 
-	function submitAttempt() {
+	const submitAttempt = () => {
 		const attemptAsString = stringFromAttempt(attempt);
 		fetch('/.netlify/functions/check', {
 			method: 'POST',
@@ -84,7 +62,7 @@ const App = () => {
 				updateAttempts(response as ICheckWordResponse);
 				updateKeys(response as ICheckWordResponse);
 			});
-	}
+	};
 
 	const updateAttempts = (response: ICheckWordResponse) => {
 		if (response.complete) setSolved(true);
@@ -94,17 +72,35 @@ const App = () => {
 		setAttempt([]);
 	};
 
+	const handleKeypress = (e)=>{
+		console.log(attempt);
+		if(e.key === 'Backspace') {
+			removeLetterFromAttempt();
+			return;
+		}
+
+		if(e.key === 'Enter' && isInDictionary(stringFromAttempt(attempt))) {
+			submitAttempt();
+			return;
+		}
+		if(e.keyCode>90 || e.keyCode<65) return;
+		addLetterToAttempt({character: e.key.toUpperCase(), state:ELetterState.unused});
+	};
+
+	window.removeEventListener('keyup', handleKeypress);
+	useEffect(()=>window.addEventListener('keyup', handleKeypress),[]);
+
 	if (solved) {
 		return <h1>You did it!</h1>;
 	}
 
 	return (
-		<div className="container-xxl">
+		<div className="container-sm">
 			<PreviousAttempts previousAttempts={previousAttempts} />
 			<CurrentAttempt attempt={attempt} />
 			<Keyboard
 				keyboardState={keyboard}
-				onKeyClick={(letter: ILetter) => handleClick(letter)}
+				onKeyClick={(letter: ILetter) => addLetterToAttempt(letter)}
 				onBackClick={removeLetterFromAttempt}
 				onEnterClick={submitAttempt}
 				isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}

@@ -1,4 +1,4 @@
-import { ELetterState, IAttempt } from './types';
+import { ELetterState, IAttempt } from '../types';
 
 export function checkWord(attemptedWord: string, actualWord: string) {
 	const cleanedAttemptedWord = attemptedWord.toUpperCase();
@@ -85,9 +85,13 @@ export function checkWordOfTheDay(
 		attempt,
 		lettersInCorrectPosition
 	);
+	const actualWordWithCorrectValuesRemoved = removeCorrectValues(
+		actualWord,
+		lettersInCorrectPosition
+	);
 	const lettersInWrongPosition = findIncludedCharacters(
 		attemptWithCorrectValuesRemoved,
-		actualWord
+		actualWordWithCorrectValuesRemoved
 	);
 
 	for (let x = 0; x < attempt.length; x++) {

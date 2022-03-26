@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { checkWord, checkWordOfTheDay, getWord } from '../../tools';
+import { checkWord, checkWordOfTheDay, getWord } from '../../helpers/tools';
 import { ICheckWordResponse } from '../../types';
 
 export const handler: Handler = async (event, context) => {

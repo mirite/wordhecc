@@ -1,6 +1,6 @@
 import React from 'react';
-import * as styles from './styles/Key.module.css';
-import { ELetterState, ILetter } from './types';
+import * as styles from '../styles/Key.module.css';
+import { ELetterState, ILetter } from '../types';
 
 interface IProps {
 	letter: ILetter;

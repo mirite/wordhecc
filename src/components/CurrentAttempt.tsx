@@ -1,7 +1,7 @@
 import React from 'react';
 import Attempt from './Attempt';
-import * as styles from './styles/CurrentAttempt.module.css';
-import { ELetterState, IAttempt } from './types';
+import * as styles from '../styles/CurrentAttempt.module.css';
+import { ELetterState, IAttempt } from '../types';
 
 interface IProps {
 	attempt: IAttempt;

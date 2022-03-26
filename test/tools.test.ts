@@ -4,8 +4,9 @@ import {
 	checkWordOfTheDay,
 	findIncludedCharacters,
 	findMatchingCharacters,
-	getWord, removeCorrectValues,
-} from '../src/tools';
+	getWord,
+	removeCorrectValues,
+} from '../src/helpers/tools';
 import { ELetterState } from '../src/types';
 
 describe('tool', function () {
@@ -76,9 +77,11 @@ describe('Get word', function () {
 	});
 });
 
-describe('Remove correct values', function() {
-	it('Should remove the letters in the positions that are true', function() {
-		expect(removeCorrectValues('HELP', [false, true, true, false])).toEqual('H__P');
+describe('Remove correct values', function () {
+	it('Should remove the letters in the positions that are true', function () {
+		expect(removeCorrectValues('HELP', [false, true, true, false])).toEqual(
+			'H__P'
+		);
 	});
 });
 

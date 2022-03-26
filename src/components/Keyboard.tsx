@@ -1,7 +1,7 @@
 import React from 'react';
 import Key from './Key';
-import * as styles from './styles/Keyboard.module.css';
-import { IKeyboard, ILetter } from './types';
+import * as styles from '../styles/Keyboard.module.css';
+import { IKeyboard, ILetter } from '../types';
 import BackspaceButton from './BackspaceButton';
 import EnterButton from './EnterButton';
 
