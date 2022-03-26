@@ -1,9 +1,10 @@
 import expect from 'Expect';
 import {
-  checkWord,
+  checkWord, checkWordOfTheDay,
   findIncludedCharacters,
   findMatchingCharacters, getWord,
 } from '../src/tools';
+import {ELetterState} from '../src/types';
 
 
 describe('tool', function() {
@@ -67,4 +68,19 @@ describe('Get word', function() {
   it('Should return a word', function() {
     expect(getWord()).toBeTruthy()
   })
-})
+});
+
+describe('Check word', function() {
+  it('Should return all in places for the correct word', function() {
+    const result = checkWordOfTheDay('HELLO','HELLO');
+    expect(result.every(l=>l.state===ELetterState.inPosition)).toBeTruthy();
+  })
+  it('Should return none in word for no shared characters', function() {
+    const result = checkWordOfTheDay('HELLO','A');
+    expect(result.some(l=>l.state===ELetterState.inPosition)).toBeFalsy();
+  })
+  it('Should return all in word for words with shared characters in a different order', function() {
+    const result = checkWordOfTheDay('HELP','PLEH');
+    expect(result.every(l=>l.state===ELetterState.inWord)).toBeTruthy();
+  })
+});

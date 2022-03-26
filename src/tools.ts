@@ -56,10 +56,17 @@ export function getWord(): string {
 	return wordsRaw[getDaysSince()];
 }
 
-export function checkWordOfTheDay(attempt: string): IAttempt {
+export function checkWordOfTheDay(
+	attempt: string,
+	override?: string
+): IAttempt {
+	const actualWord = override ?? getWord();
 	const result: IAttempt = [];
-	const lettersInCorrectPosition = findMatchingCharacters(attempt, getWord());
-	const lettersInWrongPosition = findIncludedCharacters(attempt, getWord());
+	const lettersInCorrectPosition = findMatchingCharacters(
+		attempt,
+		actualWord
+	);
+	const lettersInWrongPosition = findIncludedCharacters(attempt, actualWord);
 
 	for (let x = 0; x < attempt.length; x++) {
 		let letterState: ELetterState;
