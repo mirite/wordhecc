@@ -87,7 +87,7 @@ export function getDictionary() {
 }
 
 export function isInDictionary(word: string) {
-	return getDictionary().includes(word);
+	return getDictionary().includes(word.toLowerCase());
 }
 
 export function stringFromAttempt(attempt: IAttempt): string {
