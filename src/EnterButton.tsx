@@ -1,8 +1,16 @@
 import React from 'react';
 
-const EnterButton = () => {
+interface IProps {
+	onClick: () => void;
+}
+
+const EnterButton = (props: IProps) => {
 	return (
-		<button type="button" className={'btn btn-primary'}>
+		<button
+			type="button"
+			onClick={props.onClick}
+			className={'btn btn-primary'}
+		>
 			Enter
 		</button>
 	);

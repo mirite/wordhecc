@@ -34,7 +34,11 @@ const Keyboard = (props: IProps) => {
 		<div className={styles.keyboard}>
 			{letters.map((row, rIndex) => (
 				<div key={rIndex} className={styles.row}>
-					{rIndex === letters.length - 1 ? <EnterButton /> : ''}
+					{rIndex === letters.length - 1 ? (
+						<EnterButton onClick={props.onEnterClick} />
+					) : (
+						''
+					)}
 					{row.map((letter) => (
 						<Key
 							key={letter.character}
@@ -42,7 +46,11 @@ const Keyboard = (props: IProps) => {
 							onClick={() => props.onKeyClick(letter)}
 						/>
 					))}
-					{rIndex === letters.length - 1 ? <BackspaceButton /> : ''}
+					{rIndex === letters.length - 1 ? (
+						<BackspaceButton onClick={props.onBackClick} />
+					) : (
+						''
+					)}
 				</div>
 			))}
 		</div>

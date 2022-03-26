@@ -1,3 +1,5 @@
+import { ELetterState, IAttempt } from './types';
+
 export function checkWord(attemptedWord: string, actualWord: string) {
 	const cleanedAttemptedWord = attemptedWord.toUpperCase();
 	const cleanedActualWord = actualWord.toUpperCase();
@@ -52,4 +54,23 @@ function getDaysSince(): number {
 
 export function getWord(): string {
 	return wordsRaw[getDaysSince()];
+}
+
+export function checkWordOfTheDay(attempt: string): IAttempt {
+	const result: IAttempt = [];
+	const lettersInCorrectPosition = findMatchingCharacters(attempt, getWord());
+	const lettersInWrongPosition = findIncludedCharacters(attempt, getWord());
+
+	for (let x = 0; x < attempt.length; x++) {
+		let letterState: ELetterState;
+		if (lettersInCorrectPosition[x]) {
+			letterState = ELetterState.inPosition;
+		} else if (lettersInWrongPosition[x]) {
+			letterState = ELetterState.inWord;
+		} else {
+			letterState = ELetterState.notInWord;
+		}
+		result.push({ character: attempt[x], state: letterState });
+	}
+	return result;
 }

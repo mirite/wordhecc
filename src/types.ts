@@ -8,13 +8,7 @@ export enum ELetterState {
 export interface ILetter {
 	character: string;
 	state: ELetterState;
-	row: number;
-}
-
-export interface IAttemptResult {
-	lettersInCorrectPosition: string[];
-	lettersInWrongPosition: string[];
-	lettersNotInWord: string[];
+	row?: number;
 }
 
 export interface IKeyboard extends Array<ILetter> {}

@@ -1,8 +1,16 @@
 import React from 'react';
 
-const BackspaceButton = () => {
+interface IProps {
+	onClick: () => void;
+}
+
+const BackspaceButton = (props: IProps) => {
 	return (
-		<button type="button" className={'btn btn-primary'}>
+		<button
+			type="button"
+			onClick={props.onClick}
+			className={'btn btn-primary'}
+		>
 			Back
 		</button>
 	);

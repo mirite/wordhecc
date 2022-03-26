@@ -54,7 +54,14 @@ const App = () => {
 		setAttempt(items);
 	}
 
-	function submitAttempt() {}
+	function submitAttempt() {
+		fetch('/.netlify/functions/check', {
+			method: 'POST',
+			body: JSON.stringify(attempt),
+		})
+			.then((result) => result.json())
+			.then((wordObj) => setWord(wordObj.word));
+	}
 
 	useEffect(() => {
 		fetch('/.netlify/functions/word')
