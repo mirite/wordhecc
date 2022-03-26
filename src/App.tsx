@@ -53,6 +53,8 @@ const App = () => {
 		setAttempt(items);
 	}
 
+	function submitAttempt() {}
+
 	useEffect(() => {
 		fetch('/.netlify/functions/word')
 			.then((result) => result.json())
@@ -64,11 +66,10 @@ const App = () => {
 			<Word word={word} attempt={attempt} />
 			<Keyboard
 				keyboardState={keyboard}
-				onClick={(letter: ILetter) => handleClick(letter)}
+				onKeyClick={(letter: ILetter) => handleClick(letter)}
+				onBackClick={removeLetterFromAttempt}
+				onEnterClick={submitAttempt}
 			/>
-			<button type="button" onClick={removeLetterFromAttempt}>
-				Backspace
-			</button>
 		</div>
 	);
 };

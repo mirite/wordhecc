@@ -38,16 +38,19 @@ export function findIncludedCharacters(
 	return output;
 }
 
-const wordsRaw = require('./words.json');
-const words: string[] = [];
-for (const [word] of Object.entries(wordsRaw)) {
-	words.push(word);
-}
+const wordsRaw = require('./dict.json');
 
-function getRandomInt(max: number) {
-	return Math.floor(Math.random() * max);
+function getDaysSince():number {
+
+	const date1 = new Date("03/26/2021");
+	const today = new Date();
+
+	const differenceInTime = today.getTime() - date1.getTime();
+
+	const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+	return Math.floor(differenceInDays);
 }
 
 export function getWord(): string {
-	return words[getRandomInt(words.length - 1)];
+	return wordsRaw[getDaysSince()];
 }
