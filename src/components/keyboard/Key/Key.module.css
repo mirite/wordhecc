@@ -1,0 +1,3 @@
+.keyboardKey {
+    composes: letter from '../../../styles/Letter.module.css';
+}

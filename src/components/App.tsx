@@ -1,6 +1,13 @@
 import React from 'react';
-import Keyboard from './Keyboard';
-import CurrentAttempt from './CurrentAttempt';
+import Keyboard from './keyboard/Keyboard/Keyboard';
+import CurrentAttempt from './attempts/CurrentAttempt/CurrentAttempt';
+import PreviousAttempts from './attempts/PreviousAttempts/PreviousAttempts';
+import { stringFromAttempt } from '../helpers/wordChecker';
+import {
+	createStartingKeyboard,
+	isKeyOnKeyboard,
+} from '../helpers/create-keyboard.';
+import * as styles from './App.module.css';
 import {
 	ELetterState,
 	IAttempt,
@@ -8,13 +15,7 @@ import {
 	IKeyboard,
 	ILetter,
 } from '../types';
-import PreviousAttempts from './PreviousAttempts';
-import { isInDictionary, stringFromAttempt } from '../helpers/tools';
-import {
-	createStartingKeyboard,
-	isKeyOnKeyboard,
-} from '../helpers/create-keyboard.';
-import * as styles from '../styles/App.module.css';
+import { isInDictionary } from '../helpers/dictionary/dictionaryLoader';
 
 interface IState {
 	keyboard: IKeyboard;

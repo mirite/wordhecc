@@ -3,9 +3,3 @@
     flex-direction: column;
     gap: 0.20rem;
 }
-
-.keyboard .row {
-    display: grid;
-    gap: 0.20rem;
-}
-

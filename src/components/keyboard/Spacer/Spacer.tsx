@@ -1,7 +1,8 @@
 import React from 'react';
+import * as styles from './Spacer.module.css';
 
 const Spacer = () => {
-	return <div style={{ flexGrow: 0.5 }}></div>;
+	return <div></div>;
 };
 
 export default Spacer;

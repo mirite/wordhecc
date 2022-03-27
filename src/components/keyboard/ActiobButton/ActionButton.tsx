@@ -3,9 +3,10 @@ import React from 'react';
 interface IProps {
 	onClick: () => void;
 	enabled: boolean;
+	label: string;
 }
 
-const BackspaceButton = (props: IProps) => {
+const ActionButton = (props: IProps) => {
 	return (
 		<button
 			type="button"
@@ -13,9 +14,9 @@ const BackspaceButton = (props: IProps) => {
 			className={'btn btn-primary p-0'}
 			disabled={!props.enabled}
 		>
-			Back
+			{props.label}
 		</button>
 	);
 };
 
-export default BackspaceButton;
+export default ActionButton;
