@@ -1,2 +1,12 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+footer {
+  justify-content: center;
+  gap: 2rem;
+}
+
+@media(max-width: 500px) {
+  footer {
+    flex-direction: column;
+  }
+}
