@@ -29,6 +29,7 @@ function connectToMongo(): void {
 }
 
 export function logSuccess(count: number, attempts: string[]) {
+	connectToMongo();
 	const entry = {
 		data: 'Solved in ' + count + '\n' + attempts.join('\n'),
 	};
