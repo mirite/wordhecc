@@ -85,12 +85,13 @@ class App extends React.Component<IProps, IState> {
 	async submitAttempt() {
 		const { attempt, previousAttempts } = this.state;
 		const attemptAsString = stringFromAttempt(attempt);
+		const previousAttemptsStrings = previousAttempts.length ? previousAttempts.map((a)=>stringFromAttempt(a)) : [];
 		const result = await fetch('/.netlify/functions/check', {
 			method: 'POST',
 			body: JSON.stringify({
 				attempt: attemptAsString,
-				count: previousAttempts.length + 1,
-				previousAttempts: previousAttempts.map(stringFromAttempt),
+				count: previousAttemptsStrings.length + 1,
+				previousAttempts: previousAttemptsStrings,
 			}),
 		});
 		const response = await result.json();
