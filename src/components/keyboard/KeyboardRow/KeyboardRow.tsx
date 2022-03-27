@@ -1,10 +1,9 @@
 import React from 'react';
-import * as styles from '../styles/Keyboard.module.css';
-import EnterButton from './EnterButton';
-import Spacer from './Spacer';
-import Key from './Key';
-import BackspaceButton from './BackspaceButton';
-import { ILetter } from '../types';
+import Key from '../Key/Key';
+import ActionButton from '../ActiobButton/ActionButton';
+import Spacer from '../Spacer/Spacer';
+import * as styles from './KeyboardRow.module.css';
+import { ILetter } from '../../../types';
 
 interface IProps {
 	row: ILetter[];
@@ -38,7 +37,11 @@ const KeyboardRow = (props: IProps) => {
 	return (
 		<div key={rIndex} className={styles.row} style={rowStyles}>
 			{rIndex === 2 ? (
-				<EnterButton onClick={onEnterClick} enabled={isEnterEnabled} />
+				<ActionButton
+					onClick={onEnterClick}
+					enabled={isEnterEnabled}
+					label={'Enter'}
+				/>
 			) : (
 				''
 			)}
@@ -52,9 +55,10 @@ const KeyboardRow = (props: IProps) => {
 			))}
 			{rIndex === 1 ? <Spacer /> : ''}
 			{rIndex === 2 ? (
-				<BackspaceButton
+				<ActionButton
 					onClick={onBackClick}
 					enabled={isBackspaceEnabled}
+					label={'Backspace'}
 				/>
 			) : (
 				''

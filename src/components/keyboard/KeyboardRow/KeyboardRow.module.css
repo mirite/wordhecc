@@ -1,0 +1,4 @@
+.row {
+    display: grid;
+    gap: 0.20rem;
+}

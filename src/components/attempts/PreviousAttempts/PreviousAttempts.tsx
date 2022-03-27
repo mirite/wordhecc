@@ -1,10 +1,12 @@
 import React from 'react';
-import Attempt from './Attempt';
-import { IAttempt } from '../types';
-import * as styles from '../styles/PreviousAttempts.module.css';
+import Attempt from '../Attempt/Attempt';
+import * as styles from './PreviousAttempts.module.css';
+import { IAttempt } from '../../../types';
+
 interface IProps {
 	previousAttempts: IAttempt[];
 }
+
 const PreviousAttempts = (props: IProps) => {
 	const { previousAttempts } = props;
 	return (
