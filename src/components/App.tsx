@@ -83,11 +83,15 @@ class App extends React.Component<IProps, IState> {
 	}
 
 	async submitAttempt() {
-		const { attempt } = this.state;
+		const { attempt, previousAttempts } = this.state;
 		const attemptAsString = stringFromAttempt(attempt);
 		const result = await fetch('/.netlify/functions/check', {
 			method: 'POST',
-			body: JSON.stringify({ attempt: attemptAsString }),
+			body: JSON.stringify({
+				attempt: attemptAsString,
+				count: previousAttempts.length + 1,
+				previousAttempts: previousAttempts.map(stringFromAttempt),
+			}),
 		});
 		const response = await result.json();
 		this.updateAttempts(response as ICheckWordResponse);
@@ -134,7 +138,12 @@ class App extends React.Component<IProps, IState> {
 	render() {
 		const { solved, attempt, previousAttempts, keyboard } = this.state;
 		if (solved) {
-			return <h1 className={styles.congratulations}>You did it!</h1>;
+			return (
+				<div>
+					<h1 className={styles.congratulations}>You did it!</h1>
+					<p className="text-center">And it only took you {previousAttempts.length} tries!</p>
+				</div>
+			);
 		}
 
 		return (
