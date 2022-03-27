@@ -1,6 +1,5 @@
 import mongoose, { model, Schema, Model, Document } from 'mongoose';
 require('dotenv').config();
-connectToMongo();
 
 export interface ILogEntry extends Document {
 	added?: Date;
