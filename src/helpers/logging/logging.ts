@@ -1,6 +1,5 @@
 import mongoose, { model, Schema, Model, Document } from 'mongoose';
 require('dotenv').config();
-connectToMongo();
 
 export interface ILogEntry extends Document {
 	added?: Date;
@@ -29,6 +28,7 @@ function connectToMongo(): void {
 }
 
 export function logSuccess(count: number, attempts: string[]) {
+	connectToMongo();
 	const entry = {
 		data: 'Solved in ' + count + '\n' + attempts.join('\n'),
 	};
