@@ -19,7 +19,9 @@ const Key = (props: IProps) => {
 	return (
 		<button
 			type="button"
-			className={'btn btn-primary ' + stateClass}
+			className={
+				'btn btn-primary ' + styles.keyboardKey + ' ' + stateClass
+			}
 			onClick={props.onClick}
 		>
 			{props.letter.character}

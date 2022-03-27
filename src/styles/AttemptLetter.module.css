@@ -1,7 +1,7 @@
 .attemptLetter {
-    composes: letter from './Letter.module.css';
     border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60px;
 }

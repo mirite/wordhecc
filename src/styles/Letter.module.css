@@ -1,6 +1,7 @@
 .letter {
+    flex-grow: 1;
     color: black;
-    width: 40px;
-    height: 40px;
-    padding: 0.25rem;
+    height: 60px;
+    max-width: 46px;
+    padding: 0;
 }

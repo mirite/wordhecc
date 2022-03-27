@@ -1,6 +1,6 @@
 .attempt {
-    display: flex;
-    justify-content: left;
+    display: grid;
+   grid-template-columns: repeat(8, 1fr);
     gap: 0.25rem;
     border: 1px solid black;
     padding: 0.5rem;

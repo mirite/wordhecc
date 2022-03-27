@@ -10,7 +10,7 @@ const EnterButton = (props: IProps) => {
 		<button
 			type="button"
 			onClick={props.onClick}
-			className={'btn btn-primary'}
+			className={'btn btn-primary p-0'}
 			disabled={!props.enabled}
 		>
 			Enter

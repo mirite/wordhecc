@@ -70,7 +70,7 @@ class App extends React.Component<IProps, IState> {
 		const { attempt } = this.state;
 		const items = [...attempt];
 		if (items.length >= 8) return;
-		items.push({character: letter.character, state: ELetterState.unused});
+		items.push({ character: letter.character, state: ELetterState.unused });
 		this.setAttempt(items);
 	}
 

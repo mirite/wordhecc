@@ -1,9 +1,7 @@
 import React from 'react';
-import Key from './Key';
 import * as styles from '../styles/Keyboard.module.css';
 import { IKeyboard, ILetter } from '../types';
-import BackspaceButton from './BackspaceButton';
-import EnterButton from './EnterButton';
+import KeyboardRow from './KeyboardRow';
 
 interface IProps {
 	keyboardState: IKeyboard;
@@ -35,31 +33,16 @@ const Keyboard = (props: IProps) => {
 	return (
 		<div className={styles.keyboard}>
 			{letters.map((row, rIndex) => (
-				<div key={rIndex} className={styles.row}>
-					{rIndex === letters.length - 1 ? (
-						<EnterButton
-							onClick={props.onEnterClick}
-							enabled={props.isEnterEnabled}
-						/>
-					) : (
-						''
-					)}
-					{row.map((letter) => (
-						<Key
-							key={letter.character}
-							letter={letter}
-							onClick={() => props.onKeyClick(letter)}
-						/>
-					))}
-					{rIndex === letters.length - 1 ? (
-						<BackspaceButton
-							onClick={props.onBackClick}
-							enabled={props.isBackspaceEnabled}
-						/>
-					) : (
-						''
-					)}
-				</div>
+				<KeyboardRow
+					key={rIndex}
+					row={row}
+					rIndex={rIndex}
+					isBackspaceEnabled={props.isBackspaceEnabled}
+					isEnterEnabled={props.isEnterEnabled}
+					onBackClick={() => props.onBackClick()}
+					onEnterClick={() => props.onBackClick()}
+					onKeyClick={(e) => props.onKeyClick(e)}
+				/>
 			))}
 		</div>
 	);
