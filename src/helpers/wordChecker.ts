@@ -1,4 +1,5 @@
 import { ELetterState, IAttempt } from '../types';
+import { getWord } from './dictionary/dictionaryLoader';
 
 export function checkWord(attemptedWord: string, actualWord: string) {
 	const cleanedAttemptedWord = attemptedWord.toUpperCase();
@@ -40,23 +41,6 @@ export function findIncludedCharacters(
 		}
 	}
 	return output;
-}
-
-const wordListRaw = require('./dict.json');
-const wordListAlpha = require('./dictAlpha.json');
-
-function getDaysSince(): number {
-	const date1 = new Date('03/26/2022');
-	const today = new Date();
-
-	const differenceInTime = today.getTime() - date1.getTime();
-
-	const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-	return Math.floor(differenceInDays);
-}
-
-export function getWord(): string {
-	return wordListRaw[getDaysSince()];
 }
 
 export function removeCorrectValues(
@@ -106,14 +90,6 @@ export function checkWordOfTheDay(
 		result.push({ character: attempt[x], state: letterState });
 	}
 	return result;
-}
-
-export function getDictionary() {
-	return wordListAlpha;
-}
-
-export function isInDictionary(word: string) {
-	return getDictionary().includes(word.toLowerCase());
 }
 
 export function stringFromAttempt(attempt: IAttempt): string {

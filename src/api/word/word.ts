@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { getWord } from '../../helpers/tools';
+import { getWord } from '../../helpers/dictionary/dictionaryLoader';
 
 export const handler: Handler = async (event, context) => {
 	return {

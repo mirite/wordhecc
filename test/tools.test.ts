@@ -4,9 +4,9 @@ import {
 	checkWordOfTheDay,
 	findIncludedCharacters,
 	findMatchingCharacters,
-	getWord,
 	removeCorrectValues,
-} from '../src/helpers/tools';
+} from '../src/helpers/wordChecker';
+import { getWord } from '../src/helpers/dictionary/dictionaryLoader';
 import { ELetterState } from '../src/types';
 
 describe('tool', function () {

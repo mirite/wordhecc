@@ -2,7 +2,7 @@ import React from 'react';
 import Keyboard from './keyboard/Keyboard/Keyboard';
 import CurrentAttempt from './attempts/CurrentAttempt/CurrentAttempt';
 import PreviousAttempts from './attempts/PreviousAttempts/PreviousAttempts';
-import { isInDictionary, stringFromAttempt } from '../helpers/tools';
+import { stringFromAttempt } from '../helpers/wordChecker';
 import {
 	createStartingKeyboard,
 	isKeyOnKeyboard,
@@ -15,6 +15,7 @@ import {
 	IKeyboard,
 	ILetter,
 } from '../types';
+import { isInDictionary } from '../helpers/dictionary/dictionaryLoader';
 
 interface IState {
 	keyboard: IKeyboard;
