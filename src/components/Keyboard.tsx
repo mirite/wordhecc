@@ -40,7 +40,7 @@ const Keyboard = (props: IProps) => {
 					isBackspaceEnabled={props.isBackspaceEnabled}
 					isEnterEnabled={props.isEnterEnabled}
 					onBackClick={() => props.onBackClick()}
-					onEnterClick={() => props.onBackClick()}
+					onEnterClick={() => props.onEnterClick()}
 					onKeyClick={(e) => props.onKeyClick(e)}
 				/>
 			))}
