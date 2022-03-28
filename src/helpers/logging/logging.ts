@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mongoose, { model, Schema, Model, Document } from 'mongoose';
 require('dotenv').config();
 
@@ -16,15 +17,12 @@ export const ILogEntrySchema = new Schema({
 const LogEntryModel: Model<ILogEntry> = model('LogEntry', ILogEntrySchema);
 
 function connectToMongo(): void {
-	try {
-		mongoose.connect(process.env.CONNECTION_STRING as string, {
-			retryWrites: false,
-		});
-	} catch(e) {
-		// eslint-disable-next-line no-console
-		console.log('Connection failed ' + e);
-	}
-
+	const connectionString = process.env.CONNECTION_STRING as string;
+	if (!connectionString)
+		throw new Error('Connection string not provided in environment');
+	mongoose.connect(connectionString, {
+		retryWrites: false,
+	});
 }
 
 export function logSuccess(count: number, attempts: string[]) {
@@ -33,8 +31,10 @@ export function logSuccess(count: number, attempts: string[]) {
 		data: 'Solved in ' + count + '\n' + attempts.join('\n'),
 	};
 
-		const logEntryObject = new LogEntryModel(entry);
-	// eslint-disable-next-line no-console
-		logEntryObject.save().then(()=>console.log('Saved record')).catch(e=>console.log('Failed to save entry ' + e));
+	const logEntryObject = new LogEntryModel(entry);
 
+	logEntryObject
+		.save()
+		.then(() => console.log('Saved record'))
+		.catch((e) => console.log('Failed to save entry ' + e));
 }
