@@ -35,6 +35,6 @@ export function logSuccess(count: number, attempts: string[]) {
 
 		const logEntryObject = new LogEntryModel(entry);
 	// eslint-disable-next-line no-console
-		logEntryObject.save().catch(e=>console.log('Failed to save entry ' + e));
+		logEntryObject.save().then(()=>console.log('Saved record')).catch(e=>console.log('Failed to save entry ' + e));
 
 }
