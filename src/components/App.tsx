@@ -85,7 +85,9 @@ class App extends React.Component<IProps, IState> {
 	async submitAttempt() {
 		const { attempt, previousAttempts } = this.state;
 		const attemptAsString = stringFromAttempt(attempt);
-		const previousAttemptsStrings = previousAttempts.length ? previousAttempts.map((a)=>stringFromAttempt(a)) : [];
+		const previousAttemptsStrings = previousAttempts.length
+			? previousAttempts.map((a) => stringFromAttempt(a))
+			: [];
 		const result = await fetch('/.netlify/functions/check', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -108,6 +110,7 @@ class App extends React.Component<IProps, IState> {
 	}
 
 	handleKeypress(e: KeyboardEvent) {
+		if (this.state.solved) return;
 		if (e.key === 'Backspace') {
 			this.removeLetterFromAttempt();
 			return;
@@ -136,31 +139,48 @@ class App extends React.Component<IProps, IState> {
 		window.removeEventListener('keyup', this.handleKeypress);
 	}
 
+	getSolvedText() {
+		const { previousAttempts } = this.state;
+		return (
+			<div>
+				<h1 className={styles.congratulations}>You did it!</h1>
+				<p className="text-center">
+					And it only took you {previousAttempts.length} tries!
+				</p>
+			</div>
+		);
+	}
+
+	getKeyboard() {
+		const { attempt, keyboard } = this.state;
+		return (
+			<Keyboard
+				keyboardState={keyboard}
+				onKeyClick={(letter: ILetter) =>
+					this.addLetterToAttempt(letter)
+				}
+				onBackClick={() => this.removeLetterFromAttempt()}
+				onEnterClick={() => this.submitAttempt()}
+				isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
+				isBackspaceEnabled={attempt.length > 0}
+			/>
+		);
+	}
+
 	render() {
-		const { solved, attempt, previousAttempts, keyboard } = this.state;
-		if (solved) {
-			return (
-				<div>
-					<h1 className={styles.congratulations}>You did it!</h1>
-					<p className="text-center">And it only took you {previousAttempts.length} tries!</p>
-				</div>
-			);
-		}
+		const { solved, attempt, previousAttempts } = this.state;
 
 		return (
 			<div className={styles.container}>
 				<PreviousAttempts previousAttempts={previousAttempts} />
-				<CurrentAttempt attempt={attempt} />
-				<Keyboard
-					keyboardState={keyboard}
-					onKeyClick={(letter: ILetter) =>
-						this.addLetterToAttempt(letter)
-					}
-					onBackClick={() => this.removeLetterFromAttempt()}
-					onEnterClick={() => this.submitAttempt()}
-					isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
-					isBackspaceEnabled={attempt.length > 0}
-				/>
+				{solved ? (
+					this.getSolvedText()
+				) : (
+					<div>
+						<CurrentAttempt attempt={attempt} />{' '}
+						{this.getKeyboard()}
+					</div>
+				)}
 			</div>
 		);
 	}
