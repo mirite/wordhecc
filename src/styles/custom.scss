@@ -10,3 +10,25 @@ footer {
     flex-direction: column;
   }
 }
+
+.letter {
+  color: black;
+  height: 60px;
+  max-width: 46px;
+  padding: 0;
+}
+
+.unused {
+}
+
+.notInWord {
+  background-color: gray;
+}
+
+.inPosition {
+  background-color: green;
+}
+
+.inWord {
+  background-color: yellow;
+}
