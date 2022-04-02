@@ -1,4 +1,5 @@
 # WordHe.cc
+[https://wordhe.cc](View Site)
 Word game clone where there is no fixed word length and every word in the English language is fair game.
 ## Instructions
 * yarn run start To start development server.
