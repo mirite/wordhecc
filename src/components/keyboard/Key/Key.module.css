@@ -1,3 +1,6 @@
 .keyboardKey {
-    composes: letter from '../../../styles/Letter.module.css';
+    color: black;
+    height: 60px;
+    max-width: 46px;
+    padding: 0;
 }
