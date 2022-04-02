@@ -23,6 +23,10 @@ const Quotes = () => {
 			text: 'You misunderstood what I was saying…',
 			source: 'My Other Coworker',
 		},
+		{
+			text: 'This is evil',
+			source: 'My Other Other Coworker',
+		},
 	];
 	return (
 		<div className={styles.quotes}>
