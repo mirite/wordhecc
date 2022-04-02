@@ -1,4 +1,4 @@
-# WordHe.cc
+# wordhecc
 [View Site](https://wordhe.cc)
 
 Word game clone where there is no fixed word length and every word in the English language is fair game.
