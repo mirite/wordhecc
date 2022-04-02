@@ -22,6 +22,7 @@ interface IState {
 	attempt: IAttempt;
 	previousAttempts: IAttempt[];
 	solved: boolean;
+	stateCreated: number;
 }
 
 interface IProps {}
@@ -29,20 +30,48 @@ interface IProps {}
 class App extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
-		this.state = {
+		const stateFromStorageString =
+			window?.localStorage?.getItem('wordhecc');
+		const currentUTCDate = new Date().getUTCDate();
+		let stateToSet: IState = {
 			solved: false,
 			keyboard: createStartingKeyboard(),
 			attempt: [],
 			previousAttempts: [],
+			stateCreated: currentUTCDate,
 		};
+
+		if (stateFromStorageString) {
+			const stateFromStorage = JSON.parse(
+				stateFromStorageString
+			) as IState;
+			if (stateFromStorage?.stateCreated === currentUTCDate) {
+				stateToSet = stateFromStorage;
+			}
+		}
+		this.state = stateToSet;
+	}
+
+	updateState(newState: object) {
+		const stateToSave: { [newKey: string]: unknown } = { ...this.state };
+		for (const [key, value] of Object.entries(newState)) {
+			stateToSave[key] = value;
+		}
+		if (window.localStorage) {
+			window.localStorage.setItem(
+				'wordhecc',
+				JSON.stringify(stateToSave)
+			);
+		}
+		this.setState(newState);
 	}
 
 	setSolved() {
-		this.setState({ solved: true });
+		this.updateState({ solved: true });
 	}
 
 	setAttempt(attempt: IAttempt) {
-		this.setState({ attempt });
+		this.updateState({ attempt });
 	}
 
 	updateKeys(response: ICheckWordResponse) {
@@ -64,7 +93,7 @@ class App extends React.Component<IProps, IState> {
 			updateKeyState(key);
 		}
 
-		this.setState({ keyboard: keys });
+		this.updateState({ keyboard: keys });
 	}
 
 	addLetterToAttempt(letter: ILetter) {
@@ -106,7 +135,10 @@ class App extends React.Component<IProps, IState> {
 		const { previousAttempts } = this.state;
 		const oldPreviousAttempts = [...previousAttempts];
 		oldPreviousAttempts.push(response.result);
-		this.setState({ attempt: [], previousAttempts: oldPreviousAttempts });
+		this.updateState({
+			attempt: [],
+			previousAttempts: oldPreviousAttempts,
+		});
 	}
 
 	handleKeypress(e: KeyboardEvent) {
