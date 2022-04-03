@@ -1,10 +1,10 @@
 {
   "name": "wordhecc",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "yarn run lint && parcel build src/index.html",
+    "start": "parcel src/index.html --no-cache",
+    "build": "yarn run lint && parcel build src/index.html --no-cache",
     "test": "ts-mocha --recursive \"./test/*.ts\"",
     "lint": "eslint ./test/**/*.ts --fix && eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
   },
