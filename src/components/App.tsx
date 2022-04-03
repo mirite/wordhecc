@@ -52,18 +52,19 @@ class App extends React.Component<IProps, IState> {
 		this.state = stateToSet;
 	}
 
-	updateState(newState: object) {
-		const stateToSave: { [newKey: string]: unknown } = { ...this.state };
-		for (const [key, value] of Object.entries(newState)) {
-			stateToSave[key] = value;
-		}
+	updateState(newState: Pick<IState, never>) {
+		this.setState(newState, () => this.saveStateToStorage());
+	}
+
+	saveStateToStorage() {
+		const stateToSave: IState = { ...this.state };
+
 		if (window.localStorage) {
 			window.localStorage.setItem(
 				'wordhecc',
 				JSON.stringify(stateToSave)
 			);
 		}
-		this.setState(newState);
 	}
 
 	setSolved() {
