@@ -7,6 +7,7 @@ module.exports = {
 	entry: {
 		wordhecc: path.resolve(__dirname, 'src/index.tsx'),
 	},
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{ test: /\.tsx?$/, loader: 'ts-loader' },
