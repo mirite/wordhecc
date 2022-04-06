@@ -1,6 +1,6 @@
 import React from 'react';
 import KeyboardRow from '../KeyboardRow/KeyboardRow';
-import * as styles from './Keyboard.module.css';
+import styles from './Keyboard.module.css';
 import { IKeyboard, ILetter } from '../../../types';
 
 interface IProps {

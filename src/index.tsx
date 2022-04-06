@@ -4,6 +4,7 @@ import React from 'react';
 import Quotes from './components/Quotes/Quotes';
 import Honeybadger from '@honeybadger-io/js';
 const ErrorBoundary = require('@honeybadger-io/react').HoneybadgerErrorBoundary;
+require('./styles/custom.scss');
 
 Honeybadger.configure({
 	apiKey: 'hbp_ENX1M79SimYcIlUO4QtdeuxTx3xSIm4xeeVI',

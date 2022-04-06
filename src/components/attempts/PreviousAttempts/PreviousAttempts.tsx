@@ -1,6 +1,6 @@
 import React from 'react';
 import Attempt from '../Attempt/Attempt';
-import * as styles from './PreviousAttempts.module.css';
+import styles from './PreviousAttempts.module.css';
 import { IAttempt } from '../../../types';
 
 interface IProps {

@@ -7,7 +7,7 @@ import {
 	createStartingKeyboard,
 	isKeyOnKeyboard,
 } from '../helpers/create-keyboard.';
-import * as styles from './App.module.css';
+import styles from './App.module.css';
 import {
 	ELetterState,
 	IAttempt,

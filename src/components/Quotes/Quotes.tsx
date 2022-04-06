@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from './Quotes.module.css';
+import styles from './Quotes.module.css';
 
 const Quotes = () => {
 	const quotes = [
