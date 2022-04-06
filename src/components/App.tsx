@@ -7,7 +7,7 @@ import {
 	createStartingKeyboard,
 	isKeyOnKeyboard,
 } from '../helpers/create-keyboard.';
-import * as styles from './App.module.css';
+import styles from './App.module.css';
 import {
 	ELetterState,
 	IAttempt,
@@ -16,6 +16,7 @@ import {
 	ILetter,
 } from '../types';
 import { isInDictionary } from '../helpers/dictionary/dictionaryLoader';
+import Honeybadger from '@honeybadger-io/js';
 
 interface IState {
 	keyboard: IKeyboard;
@@ -127,6 +128,10 @@ class App extends React.Component<IProps, IState> {
 			}),
 		});
 		const response = await result.json();
+		if (response.error) {
+			Honeybadger.notify(response.error);
+			return;
+		}
 		this.updateAttempts(response as ICheckWordResponse);
 		this.updateKeys(response as ICheckWordResponse);
 	}
@@ -144,21 +149,22 @@ class App extends React.Component<IProps, IState> {
 
 	handleKeypress(e: KeyboardEvent) {
 		if (this.state.solved) return;
-		if (e.key === 'Backspace') {
+		const { key } = e;
+		if (key === 'Backspace') {
 			this.removeLetterFromAttempt();
 			return;
 		}
 
 		if (
-			e.key === 'Enter' &&
+			key === 'Enter' &&
 			isInDictionary(stringFromAttempt(this.state.attempt))
 		) {
 			this.submitAttempt();
 			return;
 		}
-		if (!isKeyOnKeyboard(e.key)) return;
+		if (!isKeyOnKeyboard(key)) return;
 		this.addLetterToAttempt({
-			character: e.key.toUpperCase(),
+			character: key.toUpperCase(),
 			state: ELetterState.unused,
 			row: 0,
 		});

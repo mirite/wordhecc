@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from './AttemptLetter.module.css';
+import styles from './AttemptLetter.module.css';
 import { ILetter, stateClasses } from '../../../types';
 
 interface IProps {

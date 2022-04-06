@@ -2,7 +2,7 @@ import React from 'react';
 import Key from '../Key/Key';
 import ActionButton from '../ActiobButton/ActionButton';
 import Spacer from '../Spacer/Spacer';
-import * as styles from './KeyboardRow.module.css';
+import styles from './KeyboardRow.module.css';
 import { ILetter } from '../../../types';
 
 interface IProps {
