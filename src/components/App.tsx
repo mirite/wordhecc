@@ -1,4 +1,5 @@
 import React from 'react';
+import Honeybadger from '@honeybadger-io/js';
 import Keyboard from './keyboard/Keyboard/Keyboard';
 import CurrentAttempt from './attempts/CurrentAttempt/CurrentAttempt';
 import PreviousAttempts from './attempts/PreviousAttempts/PreviousAttempts';
@@ -7,6 +8,7 @@ import {
 	createStartingKeyboard,
 	isKeyOnKeyboard,
 } from '../helpers/create-keyboard.';
+import { isInDictionary } from '../helpers/dictionary/dictionaryLoader';
 import styles from './App.module.css';
 import {
 	ELetterState,
@@ -15,8 +17,6 @@ import {
 	IKeyboard,
 	ILetter,
 } from '../types';
-import { isInDictionary } from '../helpers/dictionary/dictionaryLoader';
-import Honeybadger from '@honeybadger-io/js';
 
 interface IState {
 	keyboard: IKeyboard;
@@ -24,11 +24,14 @@ interface IState {
 	previousAttempts: IAttempt[];
 	solved: boolean;
 	stateCreated: number;
+	error: string;
 }
 
 interface IProps {}
 
 class App extends React.Component<IProps, IState> {
+	ref: React.RefObject<HTMLDivElement>;
+
 	constructor(props: IProps) {
 		super(props);
 		const stateFromStorageString =
@@ -40,6 +43,7 @@ class App extends React.Component<IProps, IState> {
 			attempt: [],
 			previousAttempts: [],
 			stateCreated: currentUTCDate,
+			error: '',
 		};
 
 		if (stateFromStorageString) {
@@ -51,6 +55,7 @@ class App extends React.Component<IProps, IState> {
 			}
 		}
 		this.state = stateToSet;
+		this.ref = React.createRef();
 	}
 
 	updateState(newState: Pick<IState, never>) {
@@ -126,7 +131,15 @@ class App extends React.Component<IProps, IState> {
 				count: previousAttemptsStrings.length + 1,
 				previousAttempts: previousAttemptsStrings,
 			}),
+		}).catch((err) => {
+			this.setState({ error: 'A connection error occurred ' + err.code });
 		});
+		if (!result || result.status !== 200) {
+			this.setState({
+				error: `A connection error occurred (${result?.status})`,
+			});
+			return;
+		}
 		const response = await result.json();
 		if (response.error) {
 			Honeybadger.notify(response.error);
@@ -134,6 +147,7 @@ class App extends React.Component<IProps, IState> {
 		}
 		this.updateAttempts(response as ICheckWordResponse);
 		this.updateKeys(response as ICheckWordResponse);
+		this.setState({ error: '' });
 	}
 
 	updateAttempts(response: ICheckWordResponse) {
@@ -207,11 +221,12 @@ class App extends React.Component<IProps, IState> {
 	}
 
 	render() {
-		const { solved, attempt, previousAttempts } = this.state;
+		const { solved, attempt, previousAttempts, error } = this.state;
 
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} ref={this.ref}>
 				<PreviousAttempts previousAttempts={previousAttempts} />
+				<div>{error}</div>
 				{solved ? (
 					this.getSolvedText()
 				) : (
