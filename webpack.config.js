@@ -45,7 +45,7 @@ module.exports = {
 		}),
 		new HoneybadgerWebpack({
 			apiKey: 'hbp_ENX1M79SimYcIlUO4QtdeuxTx3xSIm4xeeVI',
-			assetsUrl: 'dist/wordhecc.bundle.js',
+			assetsUrl: 'https://wordhecc.cc/wordhecc.bundle.js',
 			deploy: {
 				environment: process.env.NODE_ENV,
 				repository: 'https://github.com/mirite/wordhecc',
