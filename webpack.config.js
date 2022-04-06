@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HoneybadgerWebpack = require('@honeybadger-io/webpack');
+require('dotenv').config();
 
 module.exports = {
 	entry: {
@@ -45,9 +46,9 @@ module.exports = {
 		}),
 		new HoneybadgerWebpack({
 			apiKey: 'hbp_ENX1M79SimYcIlUO4QtdeuxTx3xSIm4xeeVI',
-			assetsUrl: 'https://wordhecc.cc/wordhecc.bundle.js',
+			assetsUrl: 'https://wordhe.cc/wordhecc.bundle.js',
 			deploy: {
-				environment: process.env.NODE_ENV,
+				environment: process.env.HB_ENV,
 				repository: 'https://github.com/mirite/wordhecc',
 			},
 		}),
