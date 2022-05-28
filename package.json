@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --mode=development --watch",
-    "build": "yarn run lint && webpack --mode=production",
+    "build": "webpack --mode=production",
     "test": "ts-mocha --recursive \"./test/*.ts\"",
     "lint": "eslint ./test/**/*.ts --fix && eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
   },
