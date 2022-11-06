@@ -1,3 +1,6 @@
+/**
+* Colour states for letters.
+**/
 export enum ELetterState {
 	unused,
 	notInWord,
