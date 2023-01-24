@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@honeybadger-io/js": "^4.7.1",
+    "@honeybadger-io/js": "^4.8.2",
     "@honeybadger-io/react": "^4.8.1",
     "@netlify/functions": "^1.0.0",
     "@types/node": "^18.11.18",
