@@ -1800,10 +1800,10 @@
     "@types/aws-lambda" "^8.10.89"
     "@types/express" "^4.17.13"
 
-"@honeybadger-io/react@^4.8.1":
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/react/-/react-4.8.1.tgz#ce596fe69f45a6959ec791cdb08941c8acbcde5a"
-  integrity sha512-TyEdC63kDUcEccSDBV2kYTx/+rUwmydkqkjL3+6Ax2yz0oCEzEMURZPN/736Xv8nXAhSBwn6mynyoglzfJe7Sw==
+"@honeybadger-io/react@^4.8.2":
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/react/-/react-4.9.3.tgz#33f433ace53669810a20ff778e270cd5d9750070"
+  integrity sha512-6diKrdeY8frUE0ZdLMUvrw/PMdcfXyO3s2PKENXkYMWZRRmUDl/tywgWj6PFmxRKCnppMTndFLbdYxiXoH4o4w==
 
 "@honeybadger-io/webpack@^4.3.1":
   version "4.7.5"

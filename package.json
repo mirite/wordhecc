@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@honeybadger-io/js": "^4.7.1",
-    "@honeybadger-io/react": "^4.8.1",
+    "@honeybadger-io/react": "^4.8.2",
     "@netlify/functions": "^1.0.0",
     "@types/node": "^18.11.18",
     "bootstrap": "^5.2.3",
