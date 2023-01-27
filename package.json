@@ -23,7 +23,7 @@
   "dependencies": {
     "@honeybadger-io/js": "^4.7.1",
     "@honeybadger-io/react": "^4.8.1",
-    "@netlify/functions": "^1.0.0",
+    "@netlify/functions": "^1.4.0",
     "@types/node": "^18.11.18",
     "bootstrap": "^5.2.3",
     "mongoose": "^6.7.2",
