@@ -1871,15 +1871,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@honeybadger-io/react@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@honeybadger-io/react@npm:5.2.0"
+"@honeybadger-io/react@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@honeybadger-io/react@npm:5.3.0"
   peerDependencies:
     "@honeybadger-io/js": 4.x || 5.x
     prop-types: ^15.5.4
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: e7e4ed768fa2e64cf2f03a741e35eda42849c749b85af26aa57c083ba70278c28cf3e3e86f528638c551faab000a5a4c9f107ce79473b7f6eccf6fcda37c8bcf
+  checksum: b634614bc3bd9e8407e5d89ef619386e1d7dabdb786ffbd5f9c56709120c310080cd95c791a7d4e9926ba73aada8b2acf26b3b36b58ba03914c6461989778d67
   languageName: node
   linkType: hard
 
@@ -4654,7 +4654,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -6875,7 +6875,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -6888,7 +6888,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.4#~builtin<compat/resolve>":
   version: 2.0.0-next.4
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=07638b"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -7588,7 +7588,7 @@ __metadata:
 
 "typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=1f5320"
+  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -7924,7 +7924,7 @@ __metadata:
     "@babel/preset-env": ^7.21.4
     "@babel/preset-react": ^7.18.6
     "@honeybadger-io/js": ^5.2.0
-    "@honeybadger-io/react": ^5.2.0
+    "@honeybadger-io/react": ^5.3.0
     "@honeybadger-io/webpack": ^5.1.7
     "@netlify/functions": ^1.4.0
     "@types/mocha": ^10.0.1
