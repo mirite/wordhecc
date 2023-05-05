@@ -1860,14 +1860,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@honeybadger-io/js@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@honeybadger-io/js@npm:5.2.0"
+"@honeybadger-io/js@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@honeybadger-io/js@npm:5.3.0"
   dependencies:
     "@honeybadger-io/core": ^5.2.0
     "@types/aws-lambda": ^8.10.89
     "@types/express": ^4.17.13
-  checksum: 4eacd88fea7db1b314c17b0080990205e5a6b31c1c24b7ffc83c59039f17efc9dece1f4b6d2a3e7ab27f3ae7d2e7c4856dc311d407591eee6cb8e96f0848be8a
+  checksum: c3fa40328437875127fb07bcb473394dd9edc8d4ed3c71f9be1caaca75c35f499eb1d79ec4f279e27e759a3601f636e98e04f9f13a5b98cb0cff3a680c5b8e50
   languageName: node
   linkType: hard
 
@@ -4654,7 +4654,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -6875,7 +6875,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -6888,7 +6888,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.4#~builtin<compat/resolve>":
   version: 2.0.0-next.4
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=07638b"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -7588,7 +7588,7 @@ __metadata:
 
 "typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=1f5320"
+  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -7923,7 +7923,7 @@ __metadata:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
     "@babel/preset-react": ^7.18.6
-    "@honeybadger-io/js": ^5.2.0
+    "@honeybadger-io/js": ^5.3.0
     "@honeybadger-io/react": ^5.2.0
     "@honeybadger-io/webpack": ^5.1.7
     "@netlify/functions": ^1.4.0
