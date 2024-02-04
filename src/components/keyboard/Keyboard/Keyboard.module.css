@@ -1,5 +1,5 @@
 .keyboard {
-    display: flex;
-    flex-direction: column;
-    gap: 0.20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }

@@ -6,7 +6,8 @@
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "test": "ts-mocha --recursive \"./test/*.ts\"",
-    "lint": "eslint ./test/**/*.ts --fix && eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "format": "prettier --write ."
   },
   "author": {
     "email": "me@jesseconner.ca",
@@ -48,11 +49,14 @@
     "@types/mocha": "^10.0.6",
     "@types/react": "^18.2.52",
     "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
     "@wordpress/eslint-plugin": "^17.7.0",
     "css-loader": "^6.10.0",
     "css-modules-typescript-loader": "^4.0.1",
     "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
     "expect": "^29.7.0",
     "html-webpack-plugin": "^5.6.0",
     "mocha": "^10.2.0",

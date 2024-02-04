@@ -1,23 +1,17 @@
-import React from 'react';
-import Attempt from '../Attempt/Attempt';
-import styles from './CurrentAttempt.module.css';
-import { ELetterState, IAttempt } from '../../../types';
+import React from "react";
+import Attempt from "../Attempt/Attempt";
+import styles from "./CurrentAttempt.module.css";
+import { ELetterState, IAttempt } from "../../../types";
 
 interface IProps {
-	attempt: IAttempt;
+  attempt: IAttempt;
 }
 const CurrentAttempt = (props: IProps) => {
-	return (
-		<div className={styles.word}>
-			<Attempt
-				attempt={
-					props.attempt.length
-						? props.attempt
-						: [{ character: '', state: ELetterState.unused }]
-				}
-			/>
-		</div>
-	);
+  return (
+    <div className={styles.word}>
+      <Attempt attempt={props.attempt.length ? props.attempt : [{ character: "", state: ELetterState.unused }]} />
+    </div>
+  );
 };
 
 export default CurrentAttempt;
