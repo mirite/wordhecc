@@ -2,6 +2,8 @@
   "name": "wordhecc",
   "version": "1.1.11",
   "license": "MIT",
+  "private": true,
+  "description": "A simple word game based on another word game",
   "scripts": {
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
@@ -14,11 +16,9 @@
     "name": "Jesse Conner",
     "url": "https://jesseconner.ca"
   },
-  "description": "A simple word game based on another word game",
   "repository": {
     "url": "git+https://github.com/mirite/wordhecc.git"
   },
-  "private": true,
   "browserslist": {
     "production": [
       ">0.2%",
