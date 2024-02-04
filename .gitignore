@@ -128,7 +128,3 @@ dist
 
 # Local Netlify folder
 .netlify
-
-# IDE Files
-.idea
-.nova
