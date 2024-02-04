@@ -8,6 +8,16 @@
     "test": "ts-mocha --recursive \"./test/*.ts\"",
     "lint": "eslint ./test/**/*.ts --fix && eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix"
   },
+  "author": {
+    "email": "me@jesseconner.ca",
+    "name": "Jesse Conner",
+    "url": "https://jesseconner.ca"
+  },
+  "description": "A simple word game based on another word game",
+  "repository": {
+    "url": "git+https://github.com/mirite/wordhecc.git"
+  },
+  "private": true,
   "browserslist": {
     "production": [
       ">0.2%",
