@@ -1,9 +1,12 @@
 import React from "react";
-import Key from "../Key/Key";
+
+import type { ILetter } from "../../../types";
 import ActionButton from "../ActiobButton/ActionButton";
+import Key from "../Key/Key";
 import Spacer from "../Spacer/Spacer";
+
 import styles from "./KeyboardRow.module.css";
-import { ILetter } from "../../../types";
+
 
 interface IProps {
   row: ILetter[];

@@ -1,7 +1,9 @@
 import wordListRaw from "./dict.json";
-
 import wordListAlpha from "./dictAlpha.json";
 
+/**
+ *
+ */
 function getDaysSince(): number {
   const date1 = new Date("03/26/2022");
   const today = new Date();
@@ -12,14 +14,24 @@ function getDaysSince(): number {
   return Math.floor(differenceInDays);
 }
 
+/**
+ *
+ */
 export function getWord(): string {
   return wordListRaw[getDaysSince()];
 }
 
+/**
+ *
+ */
 export function getDictionary() {
   return wordListAlpha;
 }
 
+/**
+ *
+ * @param word
+ */
 export function isInDictionary(word: string) {
   return getDictionary().includes(word.toLowerCase());
 }

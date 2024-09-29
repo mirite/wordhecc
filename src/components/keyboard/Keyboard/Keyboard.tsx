@@ -1,7 +1,9 @@
 import React from "react";
+
+import type { IKeyboard, ILetter } from "../../../types";
 import KeyboardRow from "../KeyboardRow/KeyboardRow";
+
 import styles from "./Keyboard.module.css";
-import { IKeyboard, ILetter } from "../../../types";
 
 interface IProps {
   keyboardState: IKeyboard;
@@ -15,6 +17,10 @@ interface IProps {
 const Keyboard = (props: IProps) => {
   const { keyboardState } = props;
 
+  /**
+   *
+   * @param keyboard
+   */
   function keyboardIntoRows(keyboard: IKeyboard): ILetter[][] {
     const output: ILetter[][] = [[]];
     let rowIndex = 0;

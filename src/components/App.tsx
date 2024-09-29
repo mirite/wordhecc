@@ -1,13 +1,16 @@
-import React from "react";
 import Honeybadger from "@honeybadger-io/js";
-import Keyboard from "./keyboard/Keyboard/Keyboard";
-import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
-import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
-import { stringFromAttempt } from "../helpers/wordChecker";
+import React from "react";
+
 import { createStartingKeyboard, isKeyOnKeyboard } from "../helpers/create-keyboard.";
 import { isInDictionary } from "../helpers/dictionary/dictionaryLoader";
+import { stringFromAttempt } from "../helpers/wordChecker";
+import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
+import { ELetterState } from "../types";
+
 import styles from "./App.module.css";
-import { ELetterState, IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
+import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
+import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
+import Keyboard from "./keyboard/Keyboard/Keyboard";
 
 interface IState {
   keyboard: IKeyboard;
@@ -20,9 +23,16 @@ interface IState {
 
 interface IProps {}
 
+/**
+ *
+ */
 class App extends React.Component<IProps, IState> {
   ref: React.RefObject<HTMLDivElement>;
 
+  /**
+   *
+   * @param props
+   */
   constructor(props: IProps) {
     super(props);
     const stateFromStorageString = window?.localStorage?.getItem("wordhecc");
@@ -46,10 +56,17 @@ class App extends React.Component<IProps, IState> {
     this.ref = React.createRef();
   }
 
+  /**
+   *
+   * @param newState
+   */
   updateState(newState: Pick<IState, never>) {
     this.setState(newState, () => this.saveStateToStorage());
   }
 
+  /**
+   *
+   */
   saveStateToStorage() {
     const stateToSave: IState = { ...this.state };
 
@@ -58,14 +75,25 @@ class App extends React.Component<IProps, IState> {
     }
   }
 
+  /**
+   *
+   */
   setSolved() {
     this.updateState({ solved: true });
   }
 
+  /**
+   *
+   * @param attempt
+   */
   setAttempt(attempt: IAttempt) {
     this.updateState({ attempt });
   }
 
+  /**
+   *
+   * @param response
+   */
   updateKeys(response: ICheckWordResponse) {
     const { keyboard } = this.state;
     const keys = [...keyboard];
@@ -86,6 +114,10 @@ class App extends React.Component<IProps, IState> {
     this.updateState({ keyboard: keys });
   }
 
+  /**
+   *
+   * @param letter
+   */
   addLetterToAttempt(letter: ILetter) {
     const { attempt } = this.state;
     const items = [...attempt];
@@ -94,6 +126,9 @@ class App extends React.Component<IProps, IState> {
     this.setAttempt(items);
   }
 
+  /**
+   *
+   */
   removeLetterFromAttempt() {
     const { attempt } = this.state;
     const items = [...attempt];
@@ -101,6 +136,9 @@ class App extends React.Component<IProps, IState> {
     this.setAttempt(items);
   }
 
+  /**
+   *
+   */
   async submitAttempt() {
     const { attempt, previousAttempts } = this.state;
     const attemptAsString = stringFromAttempt(attempt);
@@ -131,6 +169,10 @@ class App extends React.Component<IProps, IState> {
     this.setState({ error: "" });
   }
 
+  /**
+   *
+   * @param response
+   */
   updateAttempts(response: ICheckWordResponse) {
     if (response.complete) this.setSolved();
     const { previousAttempts } = this.state;
@@ -142,6 +184,10 @@ class App extends React.Component<IProps, IState> {
     });
   }
 
+  /**
+   *
+   * @param e
+   */
   handleKeypress(e: KeyboardEvent) {
     if (this.state.solved) return;
     const { key } = e;
@@ -162,14 +208,23 @@ class App extends React.Component<IProps, IState> {
     });
   }
 
+  /**
+   *
+   */
   componentDidMount() {
     window.addEventListener("keyup", (e) => this.handleKeypress(e));
   }
 
+  /**
+   *
+   */
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleKeypress);
   }
 
+  /**
+   *
+   */
   getSolvedText() {
     const { previousAttempts } = this.state;
     return (
@@ -180,6 +235,9 @@ class App extends React.Component<IProps, IState> {
     );
   }
 
+  /**
+   *
+   */
   getKeyboard() {
     const { attempt, keyboard } = this.state;
     return (
@@ -194,6 +252,9 @@ class App extends React.Component<IProps, IState> {
     );
   }
 
+  /**
+   *
+   */
   render() {
     const { solved, attempt, previousAttempts, error } = this.state;
 

@@ -1,8 +1,9 @@
-import { Handler } from "@netlify/functions";
-import { checkWord, checkWordOfTheDay } from "../../helpers/wordChecker";
+import type { Handler } from "@netlify/functions";
+
 import { getWord } from "../../helpers/dictionary/dictionaryLoader";
-import { ICheckWordResponse } from "../../types";
 import { logSuccess } from "../../helpers/logging/logging";
+import { checkWord, checkWordOfTheDay } from "../../helpers/wordChecker";
+import type { ICheckWordResponse } from "../../types";
 
 export const handler: Handler = async (event) => {
   try {

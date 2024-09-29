@@ -1,4 +1,6 @@
 import expect from "expect";
+
+import { getWord } from "../src/helpers/dictionary/dictionaryLoader";
 import {
   checkWord,
   checkWordOfTheDay,
@@ -6,7 +8,6 @@ import {
   findMatchingCharacters,
   removeCorrectValues,
 } from "../src/helpers/wordChecker";
-import { getWord } from "../src/helpers/dictionary/dictionaryLoader";
 import { ELetterState } from "../src/types";
 
 describe("tool", function () {

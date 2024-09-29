@@ -1,6 +1,9 @@
 import React from "react";
+
+import type { ILetter} from "../../../types";
+import { stateClasses } from "../../../types";
+
 import styles from "./AttemptLetter.module.css";
-import { ILetter, stateClasses } from "../../../types";
 
 interface IProps {
   letter: ILetter;

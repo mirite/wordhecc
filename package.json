@@ -1,5 +1,6 @@
 {
-  "name": "wordhecc",
+  "name": "@mirite/wordhecc",
+  "type": "module",
   "version": "1.1.11",
   "license": "MIT",
   "private": true,
@@ -8,7 +9,7 @@
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "test": "ts-mocha --recursive \"./test/*.ts\"",
-    "lint": "eslint . --fix --ignore-path .gitignore",
+    "lint": "eslint . --fix",
     "format": "prettier --write ."
   },
   "author": {
@@ -46,6 +47,7 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@honeybadger-io/webpack": "^6.2.1",
+    "@mirite/eslint-config-mirite": "^0.0.5",
     "@types/mocha": "^10.0.8",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",

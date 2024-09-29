@@ -1,5 +1,7 @@
 import React from "react";
-import { stateClasses, ILetter } from "../../../types";
+
+import type { ILetter } from "../../../types";
+import { stateClasses } from "../../../types";
 
 interface IProps {
   letter: ILetter;

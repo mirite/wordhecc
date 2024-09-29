@@ -1,12 +1,24 @@
-import { ELetterState, IAttempt } from "../types";
+import type { IAttempt } from "../types";
+import { ELetterState } from "../types";
+
 import { getWord } from "./dictionary/dictionaryLoader";
 
+/**
+ *
+ * @param attemptedWord
+ * @param actualWord
+ */
 export function checkWord(attemptedWord: string, actualWord: string) {
   const cleanedAttemptedWord = attemptedWord.toUpperCase();
   const cleanedActualWord = actualWord.toUpperCase();
   return cleanedAttemptedWord === cleanedActualWord;
 }
 
+/**
+ *
+ * @param attemptedWord
+ * @param actualWord
+ */
 export function findMatchingCharacters(attemptedWord: string, actualWord: string): Array<boolean> {
   const output: Array<boolean> = [];
 
@@ -19,6 +31,11 @@ export function findMatchingCharacters(attemptedWord: string, actualWord: string
   return output;
 }
 
+/**
+ *
+ * @param attemptedWord
+ * @param actualWord
+ */
 export function findIncludedCharacters(attemptedWord: string, actualWord: string): Array<boolean> {
   const output: Array<boolean> = [];
 
@@ -37,6 +54,11 @@ export function findIncludedCharacters(attemptedWord: string, actualWord: string
   return output;
 }
 
+/**
+ *
+ * @param attempt
+ * @param lettersInCorrectPosition
+ */
 export function removeCorrectValues(attempt: string, lettersInCorrectPosition: Array<boolean>) {
   const wordAsArray = attempt.split("");
   let output = "";
@@ -46,6 +68,11 @@ export function removeCorrectValues(attempt: string, lettersInCorrectPosition: A
   return output;
 }
 
+/**
+ *
+ * @param attempt
+ * @param override
+ */
 export function checkWordOfTheDay(attempt: string, override?: string): IAttempt {
   const actualWord = override ?? getWord();
   const result: IAttempt = [];
@@ -71,6 +98,10 @@ export function checkWordOfTheDay(attempt: string, override?: string): IAttempt 
   return result;
 }
 
+/**
+ *
+ * @param attempt
+ */
 export function stringFromAttempt(attempt: IAttempt): string {
   return attempt.reduce((newString, currentLetter) => newString + currentLetter.character, "");
 }

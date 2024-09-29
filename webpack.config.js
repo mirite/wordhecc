@@ -1,9 +1,12 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HoneybadgerWebpack = require("@honeybadger-io/webpack");
-require("dotenv").config();
+import path from "path";
 
-module.exports = {
+import HoneybadgerWebpack from "@honeybadger-io/webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+
+import ("dotenv").config();
+
+export default {
   entry: {
     wordhecc: path.resolve(__dirname, "src/index.tsx"),
   },

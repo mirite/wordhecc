@@ -1,12 +1,12 @@
-import React from "react";
-import App from "./components/App";
-import Quotes from "./components/Quotes/Quotes";
 import Honeybadger from "@honeybadger-io/js";
+import { HoneybadgerErrorBoundary as ErrorBoundary } from "@honeybadger-io/react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { HoneybadgerErrorBoundary as ErrorBoundary } from "@honeybadger-io/react";
+import App from "./components/App";
+import Quotes from "./components/Quotes/Quotes";
 
-require("./styles/custom.scss");
+import("./styles/custom.scss");
 
 Honeybadger.configure({
   apiKey: "hbp_ENX1M79SimYcIlUO4QtdeuxTx3xSIm4xeeVI",
