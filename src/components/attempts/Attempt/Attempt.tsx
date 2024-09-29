@@ -3,7 +3,7 @@ import React from "react";
 import type { IAttempt } from "../../../types";
 import AttemptLetter from "../AttemptLetter/AttemptLetter";
 
-import styles from "./Attempt.module.css";
+import * as styles from "./Attempt.module.css";
 
 interface IProps {
   attempt: IAttempt;

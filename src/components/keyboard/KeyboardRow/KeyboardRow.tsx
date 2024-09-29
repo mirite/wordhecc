@@ -5,7 +5,7 @@ import ActionButton from "../ActiobButton/ActionButton";
 import Key from "../Key/Key";
 import Spacer from "../Spacer/Spacer";
 
-import styles from "./KeyboardRow.module.css";
+import * as styles from "./KeyboardRow.module.css";
 
 
 interface IProps {

@@ -3,7 +3,7 @@ import React from "react";
 import type { ILetter} from "../../../types";
 import { stateClasses } from "../../../types";
 
-import styles from "./AttemptLetter.module.css";
+import * as styles from "./AttemptLetter.module.css";
 
 interface IProps {
   letter: ILetter;

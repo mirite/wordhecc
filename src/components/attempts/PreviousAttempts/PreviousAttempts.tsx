@@ -3,7 +3,7 @@ import React from "react";
 import type { IAttempt } from "../../../types";
 import Attempt from "../Attempt/Attempt";
 
-import styles from "./PreviousAttempts.module.css";
+import * as styles from "./PreviousAttempts.module.css";
 
 interface IProps {
   previousAttempts: IAttempt[];

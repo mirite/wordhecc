@@ -21,20 +21,19 @@ interface IState {
   error: string;
 }
 
-interface IProps {}
 
 /**
  *
  */
-class App extends React.Component<IProps, IState> {
+class App extends React.Component<unknown, IState> {
   ref: React.RefObject<HTMLDivElement>;
 
   /**
    *
    * @param props
    */
-  constructor(props: IProps) {
-    super(props);
+  constructor() {
+    super(undefined);
     const stateFromStorageString = window?.localStorage?.getItem("wordhecc");
     const currentUTCDate = new Date().getUTCDate();
     let stateToSet: IState = {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./Quotes.module.css";
+import * as styles from "./Quotes.module.css";
 
 const Quotes = () => {
   const quotes = [

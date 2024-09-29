@@ -4,7 +4,7 @@ import type { IAttempt } from "../../../types";
 import { ELetterState } from "../../../types";
 import Attempt from "../Attempt/Attempt";
 
-import styles from "./CurrentAttempt.module.css";
+import * as styles from "./CurrentAttempt.module.css";
 
 interface IProps {
   attempt: IAttempt;

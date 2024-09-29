@@ -3,7 +3,7 @@ import React from "react";
 import type { IKeyboard, ILetter } from "../../../types";
 import KeyboardRow from "../KeyboardRow/KeyboardRow";
 
-import styles from "./Keyboard.module.css";
+import * as styles from "./Keyboard.module.css";
 
 interface IProps {
   keyboardState: IKeyboard;
