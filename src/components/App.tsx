@@ -1,4 +1,3 @@
-import Honeybadger from "@honeybadger-io/js";
 import React from "react";
 
 import { createStartingKeyboard, isKeyOnKeyboard } from "../helpers/create-keyboard.";
@@ -160,7 +159,6 @@ class App extends React.Component<unknown, IState> {
     }
     const response = await result.json();
     if (response.error) {
-      Honeybadger.notify(response.error);
       return;
     }
     this.updateAttempts(response as ICheckWordResponse);

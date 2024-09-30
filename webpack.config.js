@@ -1,6 +1,5 @@
 import path from "path";
 
-import HoneybadgerWebpack from "@honeybadger-io/webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 
@@ -43,14 +42,6 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/static/index.html",
-    }),
-    new HoneybadgerWebpack({
-      apiKey: "hbp_ENX1M79SimYcIlUO4QtdeuxTx3xSIm4xeeVI",
-      assetsUrl: "https://wordhe.cc/wordhecc.bundle.js",
-      deploy: {
-        environment: process.env.HB_ENV,
-        repository: "https://github.com/mirite/wordhecc",
-      },
     }),
   ],
 };
