@@ -5,8 +5,8 @@ import { isInDictionary } from "../helpers/dictionary/dictionaryLoader";
 import { stringFromAttempt } from "../helpers/wordChecker";
 import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
 import { ELetterState } from "../types";
-
-import styles from "./App.module.css";
+import {handler as check} from "../api/check/check";
+import * as styles from "./App.module.css";
 import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
 import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
 import Keyboard from "./keyboard/Keyboard/Keyboard";
@@ -138,31 +138,12 @@ class App extends React.Component<unknown, IState> {
    *
    */
   async submitAttempt() {
-    const { attempt, previousAttempts } = this.state;
+    const { attempt } = this.state;
     const attemptAsString = stringFromAttempt(attempt);
-    const previousAttemptsStrings = previousAttempts.length ? previousAttempts.map((a) => stringFromAttempt(a)) : [];
-    const result = await fetch("/.netlify/functions/check", {
-      method: "POST",
-      body: JSON.stringify({
-        attempt: attemptAsString,
-        count: previousAttemptsStrings.length + 1,
-        previousAttempts: previousAttemptsStrings,
-      }),
-    }).catch((err) => {
-      this.setState({ error: "A connection error occurred " + err.code });
-    });
-    if (!result || result.status !== 200) {
-      this.setState({
-        error: `A connection error occurred (${result?.status})`,
-      });
-      return;
-    }
-    const response = await result.json();
-    if (response.error) {
-      return;
-    }
-    this.updateAttempts(response as ICheckWordResponse);
-    this.updateKeys(response as ICheckWordResponse);
+    const response = check(attemptAsString)
+
+    this.updateAttempts(response);
+    this.updateKeys(response);
     this.setState({ error: "" });
   }
 

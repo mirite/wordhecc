@@ -33,23 +33,17 @@
     ]
   },
   "dependencies": {
-    "@netlify/functions": "^2.8.2",
-    "@types/node": "^22.9.0",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.6.3"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.25.9",
     "@mirite/eslint-config-mirite": "^0.0.5",
     "@types/mocha": "^10.0.9",
+    "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "css-loader": "^7.1.2",
-    "dotenv": "^16.4.5",
     "eslint": "^9.14.0",
     "expect": "^29.7.0",
     "html-webpack-plugin": "^5.6.3",
@@ -60,6 +54,7 @@
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "ts-mocha": "^10.0.0",
+    "typescript": "^5.6.3",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   },

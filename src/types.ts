@@ -19,8 +19,8 @@ export interface ICheckWordResponse {
   result: IAttempt;
 }
 
-export interface IKeyboard extends Array<ILetter> {}
-export interface IAttempt extends Array<ILetter> {}
+export type IKeyboard = Array<ILetter>
+export type IAttempt = Array<ILetter>
 
 export const stateClasses: { [key in ELetterState]: string } = {
   [ELetterState.unused]: "unused",

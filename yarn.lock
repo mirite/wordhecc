@@ -1603,14 +1603,12 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@mirite/eslint-config-mirite": "npm:^0.0.5"
-    "@netlify/functions": "npm:^2.8.2"
     "@types/mocha": "npm:^10.0.9"
     "@types/node": "npm:^22.9.0"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
     bootstrap: "npm:^5.3.3"
     css-loader: "npm:^7.1.2"
-    dotenv: "npm:^16.4.5"
     eslint: "npm:^9.14.0"
     expect: "npm:^29.7.0"
     html-webpack-plugin: "npm:^5.6.3"
@@ -1628,32 +1626,6 @@ __metadata:
     webpack-cli: "npm:^5.1.4"
   languageName: unknown
   linkType: soft
-
-"@netlify/functions@npm:^2.8.2":
-  version: 2.8.2
-  resolution: "@netlify/functions@npm:2.8.2"
-  dependencies:
-    "@netlify/serverless-functions-api": "npm:1.26.1"
-  checksum: 10/7d0850d69d15f80d6d1fc1dd0d06e47b9aa6f0cd763a1569df091174894a42afe906f940c90371276c7f62f42389554d793fd28eeef0eb8e45bef8c262c26825
-  languageName: node
-  linkType: hard
-
-"@netlify/node-cookies@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@netlify/node-cookies@npm:0.1.0"
-  checksum: 10/4399905eb90967a40c485b5b44aa5425e32f9db968fe9fca9180c169b924091cc8c635104c132ba700041479c75198f9e41781780706ec3df45f2862641c6414
-  languageName: node
-  linkType: hard
-
-"@netlify/serverless-functions-api@npm:1.26.1":
-  version: 1.26.1
-  resolution: "@netlify/serverless-functions-api@npm:1.26.1"
-  dependencies:
-    "@netlify/node-cookies": "npm:^0.1.0"
-    urlpattern-polyfill: "npm:8.0.2"
-  checksum: 10/a24c7424d7f06f2b527d19fc1607c93e9f517860369f1b2edae90dc6f68d5222be6b0d15be80d80cd28c5322a8cbd521fcd38f5fe945e1e045e6db5d2b15ba89
-  languageName: node
-  linkType: hard
 
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
@@ -3329,13 +3301,6 @@ __metadata:
     no-case: "npm:^3.0.4"
     tslib: "npm:^2.0.3"
   checksum: 10/a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^16.4.5":
-  version: 16.4.5
-  resolution: "dotenv@npm:16.4.5"
-  checksum: 10/55a3134601115194ae0f924e54473459ed0d9fc340ae610b676e248cca45aa7c680d86365318ea964e6da4e2ea80c4514c1adab5adb43d6867fb57ff068f95c8
   languageName: node
   linkType: hard
 
@@ -7284,13 +7249,6 @@ __metadata:
   dependencies:
     punycode: "npm:^2.1.0"
   checksum: 10/b271ca7e3d46b7160222e3afa3e531505161c9a4e097febae9664e4b59912f4cbe94861361a4175edac3a03fee99d91e44b6a58c17a634bc5a664b19fc76fbcb
-  languageName: node
-  linkType: hard
-
-"urlpattern-polyfill@npm:8.0.2":
-  version: 8.0.2
-  resolution: "urlpattern-polyfill@npm:8.0.2"
-  checksum: 10/fd86b5c55473f3abbf9ed317b953c9cbb4fa6b3f75f681a1d982fe9c17bbc8d9bcf988f4cf3bda35e2e5875984086c97e177f97f076bb80dfa2beb85d1dd7b23
   languageName: node
   linkType: hard
 

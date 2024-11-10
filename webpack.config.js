@@ -2,10 +2,6 @@ import path from "path";
 
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
-
-import dotenv from "dotenv";
-dotenv.config();
-
 export default {
   entry: {
     wordhecc: path.resolve("src","index.tsx"),
