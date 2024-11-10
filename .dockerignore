@@ -1,0 +1,6 @@
+.git
+.idea
+.yarn
+node_modules
+Dockerfile
+tests
