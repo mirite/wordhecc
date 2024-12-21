@@ -7,7 +7,6 @@ import Spacer from "../Spacer/Spacer";
 
 import * as styles from "./KeyboardRow.module.css";
 
-
 interface IProps {
   row: ILetter[];
   rIndex: number;

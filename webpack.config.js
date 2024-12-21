@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default {
   entry: {
-    wordhecc: path.resolve("src","index.tsx"),
+    wordhecc: path.resolve("src", "index.tsx"),
   },
   devtool: "source-map",
   module: {
@@ -26,7 +26,7 @@ export default {
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
     alias: {
-      helpers: path.resolve("src","helpers"),
+      helpers: path.resolve("src", "helpers"),
     },
   },
   output: {
