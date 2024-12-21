@@ -1,3 +1,3 @@
-import {general,react} from "@mirite/eslint-config-mirite";
+import { general, react } from "@mirite/eslint-config-mirite";
 
-export default [...react,...general]
+export default [...react, ...general];

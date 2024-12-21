@@ -1,11 +1,12 @@
 import React from "react";
 
+import { handler as check } from "../api/check/check";
 import { createStartingKeyboard, isKeyOnKeyboard } from "../helpers/create-keyboard.";
 import { isInDictionary } from "../helpers/dictionary/dictionaryLoader";
 import { stringFromAttempt } from "../helpers/wordChecker";
 import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
 import { ELetterState } from "../types";
-import {handler as check} from "../api/check/check";
+
 import * as styles from "./App.module.css";
 import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
 import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
@@ -20,12 +21,11 @@ interface IState {
   error: string;
 }
 
-
 /**
  *
  */
 class App extends React.Component<unknown, IState> {
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
 
   /**
    *
@@ -140,7 +140,7 @@ class App extends React.Component<unknown, IState> {
   async submitAttempt() {
     const { attempt } = this.state;
     const attemptAsString = stringFromAttempt(attempt);
-    const response = check(attemptAsString)
+    const response = check(attemptAsString);
 
     this.updateAttempts(response);
     this.updateKeys(response);
