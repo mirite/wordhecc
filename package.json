@@ -1,7 +1,7 @@
 {
   "name": "@mirite/wordhecc",
   "type": "module",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "license": "MIT",
   "private": true,
   "description": "A simple word game based on another word game",
