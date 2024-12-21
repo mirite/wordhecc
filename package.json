@@ -34,29 +34,29 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@mirite/eslint-config-mirite": "^0.0.5",
-    "@types/mocha": "^10.0.9",
-    "@types/node": "^22.9.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@mirite/eslint-config-mirite": "^0.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "css-loader": "^7.1.2",
-    "eslint": "^9.14.0",
+    "eslint": "^9.17.0",
     "expect": "^29.7.0",
     "html-webpack-plugin": "^5.6.3",
-    "mocha": "^10.8.2",
-    "prettier": "^3.3.3",
-    "sass": "^1.80.6",
-    "sass-loader": "^16.0.3",
+    "mocha": "11.0.1",
+    "prettier": "^3.4.2",
+    "sass": "^1.83.0",
+    "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "ts-mocha": "^10.0.0",
-    "typescript": "^5.6.3",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.3"
 }
