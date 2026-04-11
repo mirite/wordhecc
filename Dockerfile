@@ -1,15 +1,31 @@
-FROM alpine AS environment
-RUN apk update
-RUN apk add --upgrade brotli nginx nginx-mod-http-brotli
+FROM node:24-alpine AS node
+RUN corepack enable
+RUN mkdir -p /app
+
+FROM node AS deps
+
 WORKDIR /app
-COPY ./dist ./dist
-RUN find . -type f -exec brotli {} \;
+
+COPY ./.yarnrc.yml .
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+
+FROM node AS build
+WORKDIR /app
+
+COPY --from=deps /app/.yarnrc.yml .
+COPY --from=deps /app/package.json ./package.json
+COPY --from=deps /app/yarn.lock ./yarn.lock
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN yarn build
 
 # Stage 2: Serve the deploy tool using Nginx
-FROM environment AS server
-WORKDIR /app
-COPY --from=environment /app/dist /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/http.d/default.conf
+FROM nginx:alpine AS server
+
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
