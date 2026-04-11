@@ -1,14 +1,14 @@
-import expect from "expect";
+import { describe, it, expect } from "vitest";
 
-import { getWord } from "../src/helpers/dictionary/dictionaryLoader";
+import { getWord } from "../src/helpers/dictionary/dictionaryLoader.js";
 import {
   checkWord,
   checkWordOfTheDay,
   findIncludedCharacters,
   findMatchingCharacters,
   removeCorrectValues,
-} from "../src/helpers/wordChecker";
-import { ELetterState } from "../src/types";
+} from "../src/helpers/wordChecker.js";
+import { ELetterState } from "../src/types.js";
 
 describe("tool", function () {
   describe("Check word", function () {
@@ -99,7 +99,7 @@ describe("Check word", function () {
   });
   it("Should not show a letter as in word, if it already had an instance in position", function () {
     const result = checkWordOfTheDay("RABBIT", "GERBIL");
-    expect(result[2].state).toEqual(ELetterState.notInWord);
-    expect(result[3].state).toEqual(ELetterState.inPosition);
+    expect(result[2]?.state).toEqual(ELetterState.notInWord);
+    expect(result[3]?.state).toEqual(ELetterState.inPosition);
   });
 });

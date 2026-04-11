@@ -1,7 +1,5 @@
-import React from "react";
-
-import type { IAttempt } from "../../../types";
-import Attempt from "../Attempt/Attempt";
+import type { IAttempt } from "../../../types.js";
+import Attempt from "../Attempt/Attempt.js";
 
 import * as styles from "./PreviousAttempts.module.css";
 

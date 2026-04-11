@@ -1,15 +1,15 @@
 import React from "react";
 
-import { createStartingKeyboard, isKeyOnKeyboard } from "../helpers/create-keyboard.";
-import { isInDictionary } from "../helpers/dictionary/dictionaryLoader";
-import { stringFromAttempt } from "../helpers/wordChecker";
-import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
-import { ELetterState } from "../types";
-import { handler as check } from "../api/check/check";
+import { createStartingKeyboard, isKeyOnKeyboard } from "../helpers/create-keyboard.js";
+import { isInDictionary } from "../helpers/dictionary/dictionaryLoader.js";
+import { stringFromAttempt } from "../helpers/wordChecker.js";
+import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types.js";
+import { ELetterState } from "../types.js";
+import { handler as check } from "../api/check/check.js";
 import * as styles from "./App.module.css";
-import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
-import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
-import Keyboard from "./keyboard/Keyboard/Keyboard";
+import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt.js";
+import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts.js";
+import Keyboard from "./keyboard/Keyboard/Keyboard.js";
 
 interface IState {
   attempt: IAttempt;

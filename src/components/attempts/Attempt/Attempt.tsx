@@ -1,7 +1,5 @@
-import React from "react";
-
-import type { IAttempt } from "../../../types";
-import AttemptLetter from "../AttemptLetter/AttemptLetter";
+import type { IAttempt } from "../../../types.js";
+import AttemptLetter from "../AttemptLetter/AttemptLetter.js";
 
 import * as styles from "./Attempt.module.css";
 

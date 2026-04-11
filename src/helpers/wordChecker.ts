@@ -1,7 +1,7 @@
-import type { IAttempt } from "../types";
-import { ELetterState } from "../types";
+import type { IAttempt } from "../types.js";
+import { ELetterState } from "../types.js";
 
-import { getWord } from "./dictionary/dictionaryLoader";
+import { getWord } from "./dictionary/dictionaryLoader.js";
 
 /**
  *
@@ -39,7 +39,7 @@ export function checkWordOfTheDay(attempt: string, override?: string): IAttempt 
     } else {
       letterState = ELetterState.notInWord;
     }
-    result.push({ character: attempt[x], state: letterState });
+    result.push({ character: attempt[x] ?? "", state: letterState });
   }
   return result;
 }

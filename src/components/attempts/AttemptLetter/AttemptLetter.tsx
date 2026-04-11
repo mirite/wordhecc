@@ -1,7 +1,5 @@
-import React from "react";
-
-import type { ILetter } from "../../../types";
-import { stateClasses } from "../../../types";
+import type { ILetter } from "../../../types.js";
+import { stateClasses } from "../../../types.js";
 
 import * as styles from "./AttemptLetter.module.css";
 

@@ -1,5 +1,5 @@
-import wordListRaw from "./dict.json";
-import wordListAlpha from "./dictAlpha.json";
+import wordListRaw from "./dict.json" with { type: "json" };
+import wordListAlpha from "./dictAlpha.json" with { type: "json" };
 
 /**
  *
@@ -12,7 +12,7 @@ export function getDictionary() {
  *
  */
 export function getWord(): string {
-  return wordListRaw[getDaysSince()];
+  return wordListRaw[getDaysSince()] ?? "Over";
 }
 
 /**

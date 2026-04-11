@@ -1,8 +1,7 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./components/App";
-import Quotes from "./components/Quotes/Quotes";
+import App from "./components/App.js";
+import Quotes from "./components/Quotes/Quotes.js";
 
 import("./styles/custom.scss");
 

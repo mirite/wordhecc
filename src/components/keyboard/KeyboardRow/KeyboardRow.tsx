@@ -1,9 +1,7 @@
-import React from "react";
-
-import type { ILetter } from "../../../types";
-import ActionButton from "../ActiobButton/ActionButton";
-import Key from "../Key/Key";
-import Spacer from "../Spacer/Spacer";
+import type { ILetter } from "../../../types.js";
+import ActionButton from "../ActiobButton/ActionButton.js";
+import Key from "../Key/Key.js";
+import Spacer from "../Spacer/Spacer.js";
 
 import * as styles from "./KeyboardRow.module.css";
 

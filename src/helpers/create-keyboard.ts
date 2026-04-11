@@ -1,5 +1,5 @@
-import type { IKeyboard, ILetter } from "../types";
-import { ELetterState } from "../types";
+import type { IKeyboard, ILetter } from "../types.js";
+import { ELetterState } from "../types.js";
 
 const letters = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
