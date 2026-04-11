@@ -11,7 +11,7 @@ interface IProps {
 const Key = (props: IProps) => {
   const stateClass = stateClasses[props.letter.state];
   return (
-    <button type="button" className={"btn btn-primary letter " + stateClass} onClick={props.onClick}>
+    <button className={"btn btn-primary letter " + stateClass} onClick={props.onClick} type="button">
       {props.letter.character}
     </button>
   );

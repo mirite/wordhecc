@@ -8,23 +8,23 @@ export enum ELetterState {
   inPosition,
 }
 
-export interface ILetter {
-  character: string;
-  state: ELetterState;
-  row?: number;
-}
+export type IAttempt = Array<ILetter>;
 
 export interface ICheckWordResponse {
   complete: boolean;
   result: IAttempt;
 }
 
-export type IKeyboard = Array<ILetter>
-export type IAttempt = Array<ILetter>
+export type IKeyboard = Array<ILetter>;
+export interface ILetter {
+  character: string;
+  row?: number;
+  state: ELetterState;
+}
 
 export const stateClasses: { [key in ELetterState]: string } = {
-  [ELetterState.unused]: "unused",
-  [ELetterState.notInWord]: "notInWord",
   [ELetterState.inPosition]: "inPosition",
   [ELetterState.inWord]: "inWord",
+  [ELetterState.notInWord]: "notInWord",
+  [ELetterState.unused]: "unused",
 };

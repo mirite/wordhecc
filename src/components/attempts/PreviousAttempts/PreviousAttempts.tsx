@@ -14,7 +14,7 @@ const PreviousAttempts = (props: IProps) => {
   return (
     <div className={styles.previousAttempts}>
       {previousAttempts.map((previousAttempt, i) => (
-        <Attempt key={i} attempt={previousAttempt} />
+        <Attempt attempt={previousAttempt} key={i} />
       ))}
     </div>
   );

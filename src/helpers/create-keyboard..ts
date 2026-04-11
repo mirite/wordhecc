@@ -9,14 +9,6 @@ const letters = [
 
 /**
  *
- * @param key
- */
-export function isKeyOnKeyboard(key: string) {
-  return letters.flat(1).includes(key.toUpperCase());
-}
-
-/**
- *
  */
 export function createStartingKeyboard(): IKeyboard {
   const rows = letters.map((row, rIndex) => {
@@ -29,4 +21,12 @@ export function createStartingKeyboard(): IKeyboard {
     });
   });
   return rows.flat(1);
+}
+
+/**
+ *
+ * @param key
+ */
+export function isKeyOnKeyboard(key: string) {
+  return letters.flat(1).includes(key.toUpperCase());
 }

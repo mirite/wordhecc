@@ -5,39 +5,39 @@ import * as styles from "./Quotes.module.css";
 const Quotes = () => {
   const quotes = [
     {
-      text: "What's wrong with you?",
       source: "My Mom",
+      text: "What's wrong with you?",
     },
     {
-      text: "It's already difficult enough",
       source: "Also My Mom",
+      text: "It's already difficult enough",
     },
     {
-      text: "I'm in misery",
       source: "My Brother",
+      text: "I'm in misery",
     },
     {
-      text: "It's the hardest word game I've ever played",
       source: "My Coworker",
+      text: "It's the hardest word game I've ever played",
     },
     {
-      text: "You misunderstood what I was saying…",
       source: "My Other Coworker",
+      text: "You misunderstood what I was saying…",
     },
     {
-      text: "This is evil",
       source: "My Other Other Coworker",
+      text: "This is evil",
     },
     {
-      text: "This used to be a lot harder",
       source: "Me",
+      text: "This used to be a lot harder",
     },
   ];
   return (
     <div className={styles.quotes}>
       {quotes.map((quote, i) => {
         return (
-          <div key={i} className={"text-center " + styles.quote}>
+          <div className={"text-center " + styles.quote} key={i}>
             <blockquote className="blockquote">
               <em>&quot;{quote.text}&quot;</em>
             </blockquote>

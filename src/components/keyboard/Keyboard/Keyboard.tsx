@@ -6,12 +6,12 @@ import KeyboardRow from "../KeyboardRow/KeyboardRow";
 import * as styles from "./Keyboard.module.css";
 
 interface IProps {
+  isBackspaceEnabled: boolean;
+  isEnterEnabled: boolean;
   keyboardState: IKeyboard;
-  onKeyClick: (letter: ILetter) => void;
   onBackClick: () => void;
   onEnterClick: () => void;
-  isEnterEnabled: boolean;
-  isBackspaceEnabled: boolean;
+  onKeyClick: (letter: ILetter) => void;
 }
 
 const Keyboard = (props: IProps) => {
@@ -40,14 +40,14 @@ const Keyboard = (props: IProps) => {
     <div className={styles.keyboard}>
       {letters.map((row, rIndex) => (
         <KeyboardRow
-          key={rIndex}
-          row={row}
-          rIndex={rIndex}
           isBackspaceEnabled={props.isBackspaceEnabled}
           isEnterEnabled={props.isEnterEnabled}
+          key={rIndex}
           onBackClick={() => props.onBackClick()}
           onEnterClick={() => props.onEnterClick()}
           onKeyClick={(e) => props.onKeyClick(e)}
+          rIndex={rIndex}
+          row={row}
         />
       ))}
     </div>

@@ -4,14 +4,8 @@ import wordListAlpha from "./dictAlpha.json";
 /**
  *
  */
-function getDaysSince(): number {
-  const date1 = new Date("03/26/2022");
-  const today = new Date();
-
-  const differenceInTime = today.getTime() - date1.getTime();
-
-  const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-  return Math.floor(differenceInDays);
+export function getDictionary() {
+  return wordListAlpha;
 }
 
 /**
@@ -23,15 +17,21 @@ export function getWord(): string {
 
 /**
  *
- */
-export function getDictionary() {
-  return wordListAlpha;
-}
-
-/**
- *
  * @param word
  */
 export function isInDictionary(word: string) {
   return getDictionary().includes(word.toLowerCase());
+}
+
+/**
+ *
+ */
+function getDaysSince(): number {
+  const date1 = new Date("03/26/2022");
+  const today = new Date();
+
+  const differenceInTime = today.getTime() - date1.getTime();
+
+  const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+  return Math.floor(differenceInDays);
 }

@@ -16,19 +16,32 @@ export function checkWord(attemptedWord: string, actualWord: string) {
 
 /**
  *
- * @param attemptedWord
- * @param actualWord
+ * @param attempt
+ * @param override
  */
-export function findMatchingCharacters(attemptedWord: string, actualWord: string): Array<boolean> {
-  const output: Array<boolean> = [];
+export function checkWordOfTheDay(attempt: string, override?: string): IAttempt {
+  const actualWord = override ?? getWord();
+  const result: IAttempt = [];
+  const lettersInCorrectPosition = findMatchingCharacters(attempt, actualWord);
+  const attemptWithCorrectValuesRemoved = removeCorrectValues(attempt, lettersInCorrectPosition);
+  const actualWordWithCorrectValuesRemoved = removeCorrectValues(actualWord, lettersInCorrectPosition);
+  const lettersInWrongPosition = findIncludedCharacters(
+    attemptWithCorrectValuesRemoved,
+    actualWordWithCorrectValuesRemoved,
+  );
 
-  const attemptArray = attemptedWord.toUpperCase().split("");
-  const actualArray = actualWord.toUpperCase().split("");
-
-  for (let x = 0; x < attemptArray.length; x++) {
-    output.push(attemptArray[x] === actualArray[x]);
+  for (let x = 0; x < attempt.length; x++) {
+    let letterState: ELetterState;
+    if (lettersInCorrectPosition[x]) {
+      letterState = ELetterState.inPosition;
+    } else if (lettersInWrongPosition[x]) {
+      letterState = ELetterState.inWord;
+    } else {
+      letterState = ELetterState.notInWord;
+    }
+    result.push({ character: attempt[x], state: letterState });
   }
-  return output;
+  return result;
 }
 
 /**
@@ -56,6 +69,23 @@ export function findIncludedCharacters(attemptedWord: string, actualWord: string
 
 /**
  *
+ * @param attemptedWord
+ * @param actualWord
+ */
+export function findMatchingCharacters(attemptedWord: string, actualWord: string): Array<boolean> {
+  const output: Array<boolean> = [];
+
+  const attemptArray = attemptedWord.toUpperCase().split("");
+  const actualArray = actualWord.toUpperCase().split("");
+
+  for (let x = 0; x < attemptArray.length; x++) {
+    output.push(attemptArray[x] === actualArray[x]);
+  }
+  return output;
+}
+
+/**
+ *
  * @param attempt
  * @param lettersInCorrectPosition
  */
@@ -66,36 +96,6 @@ export function removeCorrectValues(attempt: string, lettersInCorrectPosition: A
     output += lettersInCorrectPosition[x] ? "_" : wordAsArray[x];
   }
   return output;
-}
-
-/**
- *
- * @param attempt
- * @param override
- */
-export function checkWordOfTheDay(attempt: string, override?: string): IAttempt {
-  const actualWord = override ?? getWord();
-  const result: IAttempt = [];
-  const lettersInCorrectPosition = findMatchingCharacters(attempt, actualWord);
-  const attemptWithCorrectValuesRemoved = removeCorrectValues(attempt, lettersInCorrectPosition);
-  const actualWordWithCorrectValuesRemoved = removeCorrectValues(actualWord, lettersInCorrectPosition);
-  const lettersInWrongPosition = findIncludedCharacters(
-    attemptWithCorrectValuesRemoved,
-    actualWordWithCorrectValuesRemoved,
-  );
-
-  for (let x = 0; x < attempt.length; x++) {
-    let letterState: ELetterState;
-    if (lettersInCorrectPosition[x]) {
-      letterState = ELetterState.inPosition;
-    } else if (lettersInWrongPosition[x]) {
-      letterState = ELetterState.inWord;
-    } else {
-      letterState = ELetterState.notInWord;
-    }
-    result.push({ character: attempt[x], state: letterState });
-  }
-  return result;
 }
 
 /**

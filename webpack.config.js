@@ -3,13 +3,13 @@ import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default {
-  entry: {
-    wordhecc: path.resolve("src","index.tsx"),
-  },
   devtool: "source-map",
+  entry: {
+    wordhecc: path.resolve("src", "index.tsx"),
+  },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      { loader: "ts-loader", test: /\.tsx?$/ },
       {
         test: /\.scss$/,
         use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader" }],
@@ -23,21 +23,21 @@ export default {
       },
     ],
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
-    alias: {
-      helpers: path.resolve("src","helpers"),
-    },
-  },
   output: {
-    filename: "[name].bundle.js",
     chunkFilename: "[name].bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve("dist"),
   },
-  target: ["web", "es5"],
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/static/index.html",
     }),
   ],
+  resolve: {
+    alias: {
+      helpers: path.resolve("src", "helpers"),
+    },
+    extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
+  },
+  target: ["web", "es5"],
 };
