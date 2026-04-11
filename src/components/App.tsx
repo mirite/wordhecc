@@ -5,27 +5,26 @@ import { isInDictionary } from "../helpers/dictionary/dictionaryLoader";
 import { stringFromAttempt } from "../helpers/wordChecker";
 import type { IAttempt, ICheckWordResponse, IKeyboard, ILetter } from "../types";
 import { ELetterState } from "../types";
-import {handler as check} from "../api/check/check";
+import { handler as check } from "../api/check/check";
 import * as styles from "./App.module.css";
 import CurrentAttempt from "./attempts/CurrentAttempt/CurrentAttempt";
 import PreviousAttempts from "./attempts/PreviousAttempts/PreviousAttempts";
 import Keyboard from "./keyboard/Keyboard/Keyboard";
 
 interface IState {
-  keyboard: IKeyboard;
   attempt: IAttempt;
+  error: string;
+  keyboard: IKeyboard;
   previousAttempts: IAttempt[];
   solved: boolean;
   stateCreated: number;
-  error: string;
 }
-
 
 /**
  *
  */
 class App extends React.Component<unknown, IState> {
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
 
   /**
    *
@@ -36,12 +35,12 @@ class App extends React.Component<unknown, IState> {
     const stateFromStorageString = window?.localStorage?.getItem("wordhecc");
     const currentUTCDate = new Date().getUTCDate();
     let stateToSet: IState = {
-      solved: false,
-      keyboard: createStartingKeyboard(),
       attempt: [],
-      previousAttempts: [],
-      stateCreated: currentUTCDate,
       error: "",
+      keyboard: createStartingKeyboard(),
+      previousAttempts: [],
+      solved: false,
+      stateCreated: currentUTCDate,
     };
 
     if (stateFromStorageString) {
@@ -56,10 +55,113 @@ class App extends React.Component<unknown, IState> {
 
   /**
    *
-   * @param newState
+   * @param letter
    */
-  updateState(newState: Pick<IState, never>) {
-    this.setState(newState, () => this.saveStateToStorage());
+  addLetterToAttempt(letter: ILetter) {
+    const { attempt } = this.state;
+    const items = [...attempt];
+    if (items.length >= 8) return;
+    items.push({ character: letter.character, state: ELetterState.unused });
+    this.setAttempt(items);
+  }
+
+  /**
+   *
+   */
+  componentDidMount() {
+    window.addEventListener("keyup", (e) => this.handleKeypress(e));
+  }
+
+  /**
+   *
+   */
+  componentWillUnmount() {
+    window.removeEventListener("keyup", this.handleKeypress);
+  }
+
+  /**
+   *
+   */
+  getKeyboard() {
+    const { attempt, keyboard } = this.state;
+    return (
+      <Keyboard
+        isBackspaceEnabled={attempt.length > 0}
+        isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
+        keyboardState={keyboard}
+        onBackClick={() => this.removeLetterFromAttempt()}
+        onEnterClick={() => this.submitAttempt()}
+        onKeyClick={(letter: ILetter) => this.addLetterToAttempt(letter)}
+      />
+    );
+  }
+
+  /**
+   *
+   */
+  getSolvedText() {
+    const { previousAttempts } = this.state;
+    return (
+      <div>
+        <h1 className={styles.congratulations}>You did it!</h1>
+        <p className="text-center">And it only took you {previousAttempts.length} tries!</p>
+      </div>
+    );
+  }
+
+  /**
+   *
+   * @param e
+   */
+  handleKeypress(e: KeyboardEvent) {
+    if (this.state.solved) return;
+    const { key } = e;
+    if (key === "Backspace") {
+      this.removeLetterFromAttempt();
+      return;
+    }
+
+    if (key === "Enter" && isInDictionary(stringFromAttempt(this.state.attempt))) {
+      this.submitAttempt();
+      return;
+    }
+    if (!isKeyOnKeyboard(key)) return;
+    this.addLetterToAttempt({
+      character: key.toUpperCase(),
+      row: 0,
+      state: ELetterState.unused,
+    });
+  }
+
+  /**
+   *
+   */
+  removeLetterFromAttempt() {
+    const { attempt } = this.state;
+    const items = [...attempt];
+    items.pop();
+    this.setAttempt(items);
+  }
+
+  /**
+   *
+   */
+  render() {
+    const { attempt, error, previousAttempts, solved } = this.state;
+
+    return (
+      <div className={styles.container} ref={this.ref}>
+        <PreviousAttempts previousAttempts={previousAttempts} />
+        <div>{error}</div>
+        {solved ? (
+          this.getSolvedText()
+        ) : (
+          <div>
+            <CurrentAttempt attempt={attempt} /> {this.getKeyboard()}
+          </div>
+        )}
+      </div>
+    );
   }
 
   /**
@@ -75,6 +177,14 @@ class App extends React.Component<unknown, IState> {
 
   /**
    *
+   * @param attempt
+   */
+  setAttempt(attempt: IAttempt) {
+    this.updateState({ attempt });
+  }
+
+  /**
+   *
    */
   setSolved() {
     this.updateState({ solved: true });
@@ -82,10 +192,30 @@ class App extends React.Component<unknown, IState> {
 
   /**
    *
-   * @param attempt
    */
-  setAttempt(attempt: IAttempt) {
-    this.updateState({ attempt });
+  async submitAttempt() {
+    const { attempt } = this.state;
+    const attemptAsString = stringFromAttempt(attempt);
+    const response = check(attemptAsString);
+
+    this.updateAttempts(response);
+    this.updateKeys(response);
+    this.setState({ error: "" });
+  }
+
+  /**
+   *
+   * @param response
+   */
+  updateAttempts(response: ICheckWordResponse) {
+    if (response.complete) this.setSolved();
+    const { previousAttempts } = this.state;
+    const oldPreviousAttempts = [...previousAttempts];
+    oldPreviousAttempts.push(response.result);
+    this.updateState({
+      attempt: [],
+      previousAttempts: oldPreviousAttempts,
+    });
   }
 
   /**
@@ -114,141 +244,10 @@ class App extends React.Component<unknown, IState> {
 
   /**
    *
-   * @param letter
+   * @param newState
    */
-  addLetterToAttempt(letter: ILetter) {
-    const { attempt } = this.state;
-    const items = [...attempt];
-    if (items.length >= 8) return;
-    items.push({ character: letter.character, state: ELetterState.unused });
-    this.setAttempt(items);
-  }
-
-  /**
-   *
-   */
-  removeLetterFromAttempt() {
-    const { attempt } = this.state;
-    const items = [...attempt];
-    items.pop();
-    this.setAttempt(items);
-  }
-
-  /**
-   *
-   */
-  async submitAttempt() {
-    const { attempt } = this.state;
-    const attemptAsString = stringFromAttempt(attempt);
-    const response = check(attemptAsString)
-
-    this.updateAttempts(response);
-    this.updateKeys(response);
-    this.setState({ error: "" });
-  }
-
-  /**
-   *
-   * @param response
-   */
-  updateAttempts(response: ICheckWordResponse) {
-    if (response.complete) this.setSolved();
-    const { previousAttempts } = this.state;
-    const oldPreviousAttempts = [...previousAttempts];
-    oldPreviousAttempts.push(response.result);
-    this.updateState({
-      attempt: [],
-      previousAttempts: oldPreviousAttempts,
-    });
-  }
-
-  /**
-   *
-   * @param e
-   */
-  handleKeypress(e: KeyboardEvent) {
-    if (this.state.solved) return;
-    const { key } = e;
-    if (key === "Backspace") {
-      this.removeLetterFromAttempt();
-      return;
-    }
-
-    if (key === "Enter" && isInDictionary(stringFromAttempt(this.state.attempt))) {
-      this.submitAttempt();
-      return;
-    }
-    if (!isKeyOnKeyboard(key)) return;
-    this.addLetterToAttempt({
-      character: key.toUpperCase(),
-      state: ELetterState.unused,
-      row: 0,
-    });
-  }
-
-  /**
-   *
-   */
-  componentDidMount() {
-    window.addEventListener("keyup", (e) => this.handleKeypress(e));
-  }
-
-  /**
-   *
-   */
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleKeypress);
-  }
-
-  /**
-   *
-   */
-  getSolvedText() {
-    const { previousAttempts } = this.state;
-    return (
-      <div>
-        <h1 className={styles.congratulations}>You did it!</h1>
-        <p className="text-center">And it only took you {previousAttempts.length} tries!</p>
-      </div>
-    );
-  }
-
-  /**
-   *
-   */
-  getKeyboard() {
-    const { attempt, keyboard } = this.state;
-    return (
-      <Keyboard
-        keyboardState={keyboard}
-        onKeyClick={(letter: ILetter) => this.addLetterToAttempt(letter)}
-        onBackClick={() => this.removeLetterFromAttempt()}
-        onEnterClick={() => this.submitAttempt()}
-        isEnterEnabled={isInDictionary(stringFromAttempt(attempt))}
-        isBackspaceEnabled={attempt.length > 0}
-      />
-    );
-  }
-
-  /**
-   *
-   */
-  render() {
-    const { solved, attempt, previousAttempts, error } = this.state;
-
-    return (
-      <div className={styles.container} ref={this.ref}>
-        <PreviousAttempts previousAttempts={previousAttempts} />
-        <div>{error}</div>
-        {solved ? (
-          this.getSolvedText()
-        ) : (
-          <div>
-            <CurrentAttempt attempt={attempt} /> {this.getKeyboard()}
-          </div>
-        )}
-      </div>
-    );
+  updateState(newState: Pick<IState, never>) {
+    this.setState(newState, () => this.saveStateToStorage());
   }
 }
 
