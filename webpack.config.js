@@ -37,7 +37,8 @@ export default {
     alias: {
       helpers: path.resolve("src", "helpers"),
     },
+    extensionAlias: { ".js": [".ts", ".js", ".tsx"] },
     extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
   },
-  target: ["web", "es5"],
+  target: ["web", "es6"],
 };
